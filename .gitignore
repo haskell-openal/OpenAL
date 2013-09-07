@@ -3,7 +3,6 @@ dist/
 *.hi
 TestDevice
 configure
-install-sh
 config.guess
 config.log
 config.sub
