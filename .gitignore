@@ -3,7 +3,5 @@ dist/
 *.hi
 TestDevice
 configure
-config.guess
 config.log
-config.sub
 include/*.h
