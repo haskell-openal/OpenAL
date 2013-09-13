@@ -672,12 +672,14 @@ foreign import CALLCONV unsafe "alSourceQueueBuffers"
 -- finished playback).
 --
 -- The 'unqueueBuffers' command removes a number of buffers entries that have
--- finished processing, in the order of appearance, from the queue. The
--- operation will fail with an 'ALInvalidValue' error if more buffers are
+-- finished processing from the queue, returning the buffers that were unqueued.
+-- The operation will fail with an 'ALInvalidValue' error if more buffers are
 -- requested than available, leaving the destination arguments unchanged.
 
-unqueueBuffers :: Source -> [Buffer] -> IO ()
-unqueueBuffers = withArraySizei . alSourceUnqueueBuffers
+unqueueBuffers :: Source -> ALsizei -> IO [Buffer]
+unqueueBuffers src n = allocaArray (fromIntegral n) $ \p -> do
+    alSourceUnqueueBuffers src n p
+    peekArray (fromIntegral n) p
 
 foreign import CALLCONV unsafe "alSourceUnqueueBuffers"
    alSourceUnqueueBuffers :: Source -> ALsizei -> Ptr Buffer -> IO ()

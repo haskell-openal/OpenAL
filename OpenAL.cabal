@@ -1,5 +1,5 @@
 name:		OpenAL
-version:	1.4.0.3
+version:	1.5.0.1
 license:	BSD3
 license-file:	LICENSE
 maintainer:	Stephen Blackheath <https://github.com/ghc-ios/OpenAL>
