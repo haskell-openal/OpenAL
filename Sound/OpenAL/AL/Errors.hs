@@ -17,7 +17,7 @@ module Sound.OpenAL.AL.Errors (
    ALError(..), ALErrorCategory(..), alErrors
 ) where
 
-import Data.StateVar
+import Graphics.Rendering.OpenGL.GL.StateVar
 import Sound.OpenAL.AL.BasicTypes ( ALenum )
 import Sound.OpenAL.Constants (
    al_NO_ERROR, al_INVALID_NAME, al_INVALID_ENUM, al_INVALID_VALUE,

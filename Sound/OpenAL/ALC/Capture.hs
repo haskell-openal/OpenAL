@@ -20,7 +20,7 @@ module Sound.OpenAL.ALC.Capture (
    allCaptureDeviceSpecifiers
 ) where
 
-import Data.StateVar
+import Graphics.Rendering.OpenGL.GL.StateVar
 import Foreign.Ptr ( Ptr, nullPtr, FunPtr )
 import Sound.OpenAL.AL.Buffer ( Format )
 import Sound.OpenAL.AL.Format ( marshalFormat )

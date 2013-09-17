@@ -19,7 +19,7 @@ module Sound.OpenAL.ALC.Extensions (
 ) where
 
 import Control.Monad ( liftM2 )
-import Data.StateVar
+import Graphics.Rendering.OpenGL.GL.StateVar
 import Foreign.Ptr ( Ptr, FunPtr )
 import Sound.OpenAL.ALC.BasicTypes ( ALCchar, ALCenum, ALCint )
 import Sound.OpenAL.ALC.Device ( Device )

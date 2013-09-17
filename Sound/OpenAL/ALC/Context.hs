@@ -27,7 +27,7 @@ module Sound.OpenAL.ALC.Context (
 ) where
 
 
-import Data.StateVar
+import Graphics.Rendering.OpenGL.GL.StateVar
 import Foreign.Marshal.Array ( withArray0 )
 import Foreign.Ptr ( Ptr )
 import Sound.OpenAL.ALC.BasicTypes ( ALCint )

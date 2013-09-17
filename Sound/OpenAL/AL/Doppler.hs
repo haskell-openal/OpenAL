@@ -19,7 +19,7 @@ module Sound.OpenAL.AL.Doppler (
    dopplerFactor, speedOfSound
 ) where
 
-import Data.StateVar
+import Graphics.Rendering.OpenGL.GL.StateVar
 import Foreign.Ptr ( FunPtr )
 import Sound.OpenAL.AL.BasicTypes ( ALenum, ALfloat )
 import Sound.OpenAL.AL.Extensions ( alProcAddress )

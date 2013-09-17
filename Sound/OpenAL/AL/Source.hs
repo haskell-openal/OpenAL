@@ -76,9 +76,9 @@ module Sound.OpenAL.AL.Source (
 ) where
 
 import Control.Monad
-import Data.ObjectName
-import Data.StateVar
-import Data.Tensor
+import Graphics.Rendering.OpenGL.GL.ObjectName
+import Graphics.Rendering.OpenGL.GL.StateVar
+import Graphics.Rendering.OpenGL.GL.Tensor
 import Foreign.Marshal.Array
 import Foreign.Marshal.Utils
 import Foreign.Ptr
@@ -111,14 +111,15 @@ instance Storable Source where
    poke ptr   (Source b) = poke1 (castPtr ptr) b
 
 instance ObjectName Source where
+   deleteObjectNames = withArraySizei alDeleteSources
+
+   isObjectName = fmap unmarshalALboolean . alIsSource
+
+instance GeneratableObjectName Source where
    genObjectNames n =
       allocaArray n $ \buf -> do
          alGenSources (fromIntegral n) buf
          peekArray n buf
-
-   deleteObjectNames = withArraySizei alDeleteSources
-
-   isObjectName = fmap unmarshalALboolean . alIsSource
 
 foreign import CALLCONV unsafe "alGenSources"
    alGenSources :: ALsizei -> Ptr Source -> IO ()

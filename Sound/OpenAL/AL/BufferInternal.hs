@@ -17,7 +17,7 @@ module Sound.OpenAL.AL.BufferInternal (
    Buffer(..), marshalBuffer, unmarshalBuffer
 ) where
 
-import Data.ObjectName
+import Graphics.Rendering.OpenGL.GL.ObjectName
 import Foreign.Marshal.Array ( withArrayLen, peekArray, allocaArray )
 import Foreign.Ptr ( Ptr, castPtr )
 import Foreign.Storable ( Storable(..) )
@@ -55,15 +55,16 @@ instance Storable Buffer where
 -- avoid an orphan module.
 
 instance ObjectName Buffer where
-   genObjectNames n =
-      allocaArray n $ \buf -> do
-        alGenBuffers (fromIntegral n) buf
-        peekArray n buf
-
    deleteObjectNames buffers =
       withArrayLen buffers $ alDeleteBuffers . fromIntegral
 
    isObjectName = fmap unmarshalALboolean . alIsBuffer
+
+instance GeneratableObjectName Buffer where
+   genObjectNames n =
+      allocaArray n $ \buf -> do
+        alGenBuffers (fromIntegral n) buf
+        peekArray n buf
 
 foreign import CALLCONV unsafe "alGenBuffers"
    alGenBuffers :: ALsizei -> Ptr Buffer -> IO ()

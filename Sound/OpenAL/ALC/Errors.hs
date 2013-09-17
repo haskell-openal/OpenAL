@@ -17,7 +17,7 @@ module Sound.OpenAL.ALC.Errors (
    ALCError(..), ALCErrorCategory(..), alcErrors
 ) where
 
-import Data.StateVar
+import Graphics.Rendering.OpenGL.GL.StateVar
 import Sound.OpenAL.ALC.BasicTypes ( ALCenum )
 import Sound.OpenAL.ALC.Device ( Device )
 import Sound.OpenAL.ALC.QueryUtils ( StringQuery(..), getString )

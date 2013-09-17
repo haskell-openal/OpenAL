@@ -37,17 +37,17 @@ module Sound.OpenAL (
    , module Sound.OpenAL.ALC
 
    -- * Convenience Re-exports
-   , module Data.ObjectName
-   , module Data.StateVar
-   , module Data.Tensor
+   , module Graphics.Rendering.OpenGL.GL.ObjectName
+   , module Graphics.Rendering.OpenGL.GL.StateVar
+   , module Graphics.Rendering.OpenGL.GL.Tensor
 ) where
 
 import Sound.OpenAL.AL
 import Sound.OpenAL.ALC
 
-import Data.ObjectName
-import Data.StateVar
-import Data.Tensor ( Vector3(..), Vertex3(..) )
+import Graphics.Rendering.OpenGL.GL.ObjectName
+import Graphics.Rendering.OpenGL.GL.StateVar
+import Graphics.Rendering.OpenGL.GL.Tensor ( Vector3(..), Vertex3(..) )
 
 --------------------------------------------------------------------------------
 -- $ABriefHistoryOfOpenAL

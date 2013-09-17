@@ -18,7 +18,7 @@ module Sound.OpenAL.AL.Extensions (
    alExtensions, alIsExtensionPresent, alProcAddress, alEnumValue, alVersion
 ) where
 
-import Data.StateVar
+import Graphics.Rendering.OpenGL.GL.StateVar
 import Foreign.Ptr ( Ptr, FunPtr )
 import Sound.OpenAL.AL.ALboolean ( unmarshalALboolean )
 import Sound.OpenAL.AL.BasicTypes ( ALboolean, ALchar, ALenum )

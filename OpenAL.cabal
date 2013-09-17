@@ -1,5 +1,5 @@
 name: OpenAL
-version: 1.5.0.1
+version: 1.5.0.0
 license: BSD3
 license-file: LICENSE
 maintainer: Sven Panne <svenpanne@gmail.com>, Stephen Blackheath <https://github.com/ghc-ios/OpenAL>
@@ -73,5 +73,5 @@ library
     includes: HsOpenAL.h
     install-includes: HsOpenAL.h
     ghc-options: -Wall
-    build-depends: base >= 3 && < 5, StateVar, ObjectName, Tensor
+    build-depends: base >= 3 && < 5, OpenGL >= 2.9.0.0
     extensions: CPP, ForeignFunctionInterface

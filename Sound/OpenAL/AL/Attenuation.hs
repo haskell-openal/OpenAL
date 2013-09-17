@@ -27,7 +27,7 @@ module Sound.OpenAL.AL.Attenuation (
    -- $NoCullingByDistance
 ) where
 
-import Data.StateVar
+import Graphics.Rendering.OpenGL.GL.StateVar
 import Foreign.Marshal.Alloc ( alloca )
 import Foreign.Ptr ( Ptr )
 import Sound.OpenAL.AL.BasicTypes ( ALint, ALenum )

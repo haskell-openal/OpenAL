@@ -18,7 +18,7 @@ module Sound.OpenAL.ALC.QueryUtils (
 ) where
 
 import Control.Monad ( when )
-import Data.StateVar
+import Graphics.Rendering.OpenGL.GL.StateVar
 import Foreign.Marshal.Array ( withArray, peekArray )
 import Foreign.Ptr ( Ptr )
 import Sound.OpenAL.ALC.ALCboolean ( unmarshalALCboolean )
