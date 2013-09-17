@@ -1,25 +1,38 @@
-name:		OpenAL
-version:	1.5.0.1
-license:	BSD3
-license-file:	LICENSE
-maintainer:	Stephen Blackheath <https://github.com/ghc-ios/OpenAL>
-homepage:	https://github.com/ghc-ios/OpenAL
-category:	Sound
-synopsis:	A binding to the OpenAL cross-platform 3D audio API
+name: OpenAL
+version: 1.5.0.1
+license: BSD3
+license-file: LICENSE
+maintainer: Sven Panne <svenpanne@gmail.com>, Stephen Blackheath <https://github.com/ghc-ios/OpenAL>
+bug-reports: https://github.com/haskell-openal/ALUT/issues
+homepage: https://github.com/haskell-openal/ALUT
+category: Sound
+synopsis: A binding to the OpenAL cross-platform 3D audio API
 description:
-	A Haskell binding for the OpenAL cross-platform 3D audio API,
-	appropriate for use with gaming applications and many other
-	types of audio applications.  For more information about OpenAL,
-	please see: <http://connect.creativelabs.com/openal/>.
-build-type:     Configure
+        A Haskell binding for the OpenAL cross-platform 3D audio API,
+        appropriate for use with gaming applications and many other
+        types of audio applications.  For more information about OpenAL,
+        please see: <http://connect.creativelabs.com/openal/>.
+build-type: Configure
 cabal-version:  >= 1.6
 extra-source-files:
-	OpenAL.buildinfo.in README aclocal.m4 config.guess config.sub configure
-	configure.ac examples/test/TestDevice.hs include/HsOpenAL.h.in
-	include/HsOpenALConfig.h.in install-sh
+        OpenAL.buildinfo.in
+        README
+        aclocal.m4
+        config.guess
+        config.sub
+        configure
+        configure.ac
+        examples/test/TestDevice.hs
+        include/HsOpenAL.h.in
+        include/HsOpenALConfig.h.in
+        install-sh
 extra-tmp-files:
-	config.log config.status autom4te.cache
-	OpenAL.buildinfo include/HsOpenALConfig.h include/HsOpenAL.h
+        config.log
+        config.status
+        autom4te.cache
+        OpenAL.buildinfo
+        include/HsOpenALConfig.h
+        include/HsOpenAL.h
 source-repository head
   type: git
   location: https://github.com/ghc-ios/OpenAL
@@ -56,9 +69,9 @@ library
             Sound.OpenAL.ALC.String,
             Sound.OpenAL.Config,
             Sound.OpenAL.Constants
-    include-dirs:	include
+    include-dirs: include
     includes: HsOpenAL.h
     install-includes: HsOpenAL.h
     ghc-options: -Wall
-    build-depends:	base >= 3 && < 5, StateVar, ObjectName, Tensor
-    extensions:	CPP, ForeignFunctionInterface
+    build-depends: base >= 3 && < 5, StateVar, ObjectName, Tensor
+    extensions: CPP, ForeignFunctionInterface
