@@ -19,8 +19,8 @@ check what f = f >>= maybe (error $ what ++ " failed") return
 boolToMaybe :: Bool -> Maybe ()
 boolToMaybe x = if x then Just () else Nothing
 
-getDeviceSpec :: IO [String] -> String -> IO DeviceSpecifier
-getDeviceSpec getter what = do
+getDeviceSpec :: String -> IO [String] -> IO DeviceSpecifier
+getDeviceSpec what getter = do
    deviceSpecs <- getter
    unless (null deviceSpecs) $ do
       putStrLn $ "Found " ++ show (length deviceSpecs) ++ " " ++ what ++ ":"
@@ -29,8 +29,8 @@ getDeviceSpec getter what = do
 
 main :: IO ()
 main = do
-   d <- getDeviceSpec getArgs "commandline arguments" `orElse`
-        getDeviceSpec (get allDeviceSpecifiers) "enumerated devices"
+   d <- getDeviceSpec "commandline arguments" getArgs `orElse`
+        getDeviceSpec "enumerated devices" (get allDeviceSpecifiers)
    putStrLn $ "Using " ++ showDevice d ++ " device"
    device <- check "openDevice" $ openDevice d
    threadDelay 1000000
