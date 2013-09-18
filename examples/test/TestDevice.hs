@@ -1,6 +1,6 @@
+import Control.Concurrent ( threadDelay )
 import Control.Monad ( unless )
 import System.IO ( hPutStrLn, stderr )
-import System.Posix.Unistd ( sleep )
 import Sound.OpenAL
 
 main :: IO ()
@@ -9,7 +9,7 @@ main = do
    case maybeDevice of
       Nothing -> hPutStrLn stderr "openDevice failed"
       Just device -> do
-         sleep 1
+         threadDelay 1000000
          ok <- closeDevice device
          unless ok $
             hPutStrLn stderr "closeDevice failed"
