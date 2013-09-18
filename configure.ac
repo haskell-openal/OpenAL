@@ -1,4 +1,4 @@
-AC_INIT([Haskell HOpenAL package], [1.5.0.1], [svenpanne@gmail.com], [OpenAL])
+AC_INIT([Haskell HOpenAL package], [1.5.0.0], [svenpanne@gmail.com], [OpenAL])
 
 # Safety check: Ensure that we are in the correct source directory.
 AC_CONFIG_SRCDIR([include/HsOpenAL.h.in])
