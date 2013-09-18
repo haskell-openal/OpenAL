@@ -16,7 +16,7 @@ build-type: Configure
 cabal-version:  >= 1.6
 extra-source-files:
         OpenAL.buildinfo.in
-        README
+        README.md
         aclocal.m4
         config.guess
         config.sub
