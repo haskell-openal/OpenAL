@@ -33,9 +33,6 @@ extra-tmp-files:
         OpenAL.buildinfo
         include/HsOpenALConfig.h
         include/HsOpenAL.h
-source-repository head
-  type: git
-  location: https://github.com/ghc-ios/OpenAL
 library
     exposed-modules:
             Sound.OpenAL,
@@ -75,3 +72,7 @@ library
     ghc-options: -Wall
     build-depends: base >= 3 && < 5, OpenGL >= 2.9.0.0
     extensions: CPP, ForeignFunctionInterface
+
+source-repository head
+  type: git
+  location: https://github.com/haskell-openal/ALUT
