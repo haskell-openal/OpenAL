@@ -40,7 +40,19 @@ fi
 
 AL_BUILD_PACKAGE=yes
 
-AC_CHECK_HEADERS([AL/alext.h OpenAL/alext.h], [break])
+AC_CHECK_HEADERS([AL/alext.h OpenAL/alext.h], [break], [],
+[#if defined(HAVE_AL_AL_H)
+#include <AL/al.h>
+#elif defined(HAVE_OPENAL_AL_H)
+#include <OpenAL/al.h>
+#endif
+
+#if defined(HAVE_AL_ALC_H)
+#include <AL/alc.h>
+#elif defined(HAVE_OPENAL_ALC_H)
+#include <OpenAL/alc.h>
+#endif
+])
 
 FP_FUNC_ALCCLOSEDEVICE_VOID
 FP_FUNC_ALCMAKECONTEXTCURRENT_VOID
