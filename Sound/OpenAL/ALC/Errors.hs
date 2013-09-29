@@ -90,5 +90,5 @@ alcErrors device =
             s <- getString (Just device) (ALCErrorCategory c)
             return [ ALCError (unmarshalALCErrorCategory c) s ]
 
-foreign import CALLCONV unsafe "alcGetError"
+foreign import ccall unsafe "alcGetError"
    alcGetError :: ALCdevice -> IO ALCenum

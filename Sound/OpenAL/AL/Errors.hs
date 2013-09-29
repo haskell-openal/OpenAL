@@ -85,5 +85,5 @@ alErrors =
             s <- getString (ALErrorCategory c)
             return [ ALError (unmarshalALErrorCategory c) s ]
 
-foreign import CALLCONV unsafe "alGetError"
+foreign import ccall unsafe "alGetError"
    alGetError :: IO ALenum

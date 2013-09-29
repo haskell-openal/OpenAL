@@ -60,7 +60,7 @@ alIsExtensionPresent extensionName =
       fmap unmarshalALboolean $
          withALString extensionName alIsExtensionPresent_
 
-foreign import CALLCONV unsafe "alIsExtensionPresent"
+foreign import ccall unsafe "alIsExtensionPresent"
    alIsExtensionPresent_ :: Ptr ALchar -> IO ALboolean
 
 --------------------------------------------------------------------------------
@@ -78,7 +78,7 @@ alProcAddress :: String -> GettableStateVar (FunPtr a)
 alProcAddress funcName = makeGettableStateVar $
    withALString funcName alGetProcAddress
 
-foreign import CALLCONV unsafe "alGetProcAddress"
+foreign import ccall unsafe "alGetProcAddress"
    alGetProcAddress :: Ptr ALchar -> IO (FunPtr a)
 
 --------------------------------------------------------------------------------
@@ -99,5 +99,5 @@ alEnumValue :: String -> GettableStateVar ALenum
 alEnumValue enumName = makeGettableStateVar $
    withALString enumName alGetEnumValue
 
-foreign import CALLCONV unsafe "alGetEnumValue"
+foreign import ccall unsafe "alGetEnumValue"
    alGetEnumValue :: Ptr ALchar -> IO ALenum

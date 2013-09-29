@@ -63,7 +63,7 @@ captureOpenDevice maybeDeviceSpec frequency format size = do
              (flip withALCString open)
              maybeDeviceSpec)
 
-foreign import CALLCONV unsafe "dynamic"
+foreign import ccall unsafe "dynamic"
    invokeCaptureOpenDevice :: Invoker (Ptr ALCchar -> ALCuint -> ALCenum -> ALCsizei -> IO ALCdevice)
 
 --------------------------------------------------------------------------------
@@ -76,7 +76,7 @@ captureStartStop funName device = do
    funPtr <- getCaptureFunc funName
    invokeCaptureStartStop funPtr (marshalDevice device)
 
-foreign import CALLCONV unsafe "dynamic"
+foreign import ccall unsafe "dynamic"
    invokeCaptureStartStop :: Invoker (ALCdevice -> IO ()) 
 
 --------------------------------------------------------------------------------
@@ -92,7 +92,7 @@ captureSamples device buf n = do
    funPtr <- getCaptureFunc "alcCaptureSamples"
    invokeCaptureSamples funPtr (marshalDevice device) buf n
 
-foreign import CALLCONV unsafe "dynamic"
+foreign import ccall unsafe "dynamic"
    invokeCaptureSamples :: Invoker (ALCdevice -> Ptr a -> NumSamples -> IO ())
 
 --------------------------------------------------------------------------------
@@ -108,7 +108,7 @@ captureCloseDevice device = do
    fmap unmarshalALCboolean .
       invokeCaptureCloseDevice funPtr . marshalDevice $ device
 
-foreign import CALLCONV unsafe "dynamic"
+foreign import ccall unsafe "dynamic"
    invokeCaptureCloseDevice :: Invoker (ALCdevice -> IO ALCboolean) 
 
 --------------------------------------------------------------------------------

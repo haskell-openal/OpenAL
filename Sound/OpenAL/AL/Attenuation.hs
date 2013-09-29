@@ -206,8 +206,8 @@ distanceModel =
           peek1 (unmarshalDistanceModel . fromIntegral) buf)
       (alDistanceModel . marshalDistanceModel)
 
-foreign import CALLCONV unsafe "alGetIntegerv"
+foreign import ccall unsafe "alGetIntegerv"
    alGetIntegerv :: ALenum -> Ptr ALint -> IO ()
 
-foreign import CALLCONV unsafe "alDistanceModel"
+foreign import ccall unsafe "alDistanceModel"
    alDistanceModel :: ALenum -> IO ()

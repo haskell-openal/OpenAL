@@ -68,11 +68,11 @@ instance GeneratableObjectName Buffer where
         alGenBuffers (fromIntegral n) buf
         peekArray n buf
 
-foreign import CALLCONV unsafe "alGenBuffers"
+foreign import ccall unsafe "alGenBuffers"
    alGenBuffers :: ALsizei -> Ptr Buffer -> IO ()
 
-foreign import CALLCONV unsafe "alDeleteBuffers"
+foreign import ccall unsafe "alDeleteBuffers"
    alDeleteBuffers :: ALsizei -> Ptr Buffer -> IO ()
 
-foreign import CALLCONV unsafe "alIsBuffer"
+foreign import ccall unsafe "alIsBuffer"
    alIsBuffer :: Buffer -> IO ALboolean

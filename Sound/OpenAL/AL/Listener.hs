@@ -113,7 +113,7 @@ orientation = makeListenerVar GetOrientation 6 (peek6 Vector3) listenerVector6
 listenerf :: GetPName -> ALfloat -> IO ()
 listenerf = alListenerf . marshalGetPName
 
-foreign import CALLCONV unsafe "alListenerf"
+foreign import ccall unsafe "alListenerf"
    alListenerf :: ALenum -> ALfloat -> IO ()
 
 --------------------------------------------------------------------------------
@@ -127,7 +127,7 @@ listenerVector6 n (x, y) = withArray [x, y] $ listenerfv n
 listenerfv :: GetPName -> Ptr a -> IO ()
 listenerfv = alListenerfv . marshalGetPName
 
-foreign import CALLCONV unsafe "alListenerfv"
+foreign import ccall unsafe "alListenerfv"
    alListenerfv :: ALenum -> Ptr a -> IO ()
 
 --------------------------------------------------------------------------------
@@ -135,7 +135,7 @@ foreign import CALLCONV unsafe "alListenerfv"
 getListenerfv :: GetPName -> Ptr ALfloat -> IO ()
 getListenerfv = alGetListenerfv . marshalGetPName
 
-foreign import CALLCONV unsafe "alGetListenerfv"
+foreign import ccall unsafe "alGetListenerfv"
    alGetListenerfv :: ALenum -> Ptr ALfloat -> IO ()
 
 --------------------------------------------------------------------------------

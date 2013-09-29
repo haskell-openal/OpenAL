@@ -120,5 +120,5 @@ marshalStringName x = case x of
 getString :: StringName -> IO String
 getString n = alGetString (marshalStringName n) >>= peekALString 
 
-foreign import CALLCONV unsafe "alGetString"
+foreign import ccall unsafe "alGetString"
    alGetString :: ALenum -> IO (Ptr ALchar)

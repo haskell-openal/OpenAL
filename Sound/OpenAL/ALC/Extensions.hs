@@ -53,7 +53,7 @@ alcProcAddress maybeDevice funcName =
       withALCString funcName .
          alcGetProcAddress . marshalDevice . maybe nullDevice id $ maybeDevice
 
-foreign import CALLCONV unsafe "alcGetProcAddress"
+foreign import ccall unsafe "alcGetProcAddress"
    alcGetProcAddress :: ALCdevice -> Ptr ALCchar -> IO (FunPtr a)
 
 --------------------------------------------------------------------------------
@@ -69,7 +69,7 @@ alcEnumValue maybeDevice enumName =
       withALCString enumName .
          alcGetEnumValue . marshalDevice . maybe nullDevice id $ maybeDevice
 
-foreign import CALLCONV unsafe "alcGetEnumValue"
+foreign import ccall unsafe "alcGetEnumValue"
    alcGetEnumValue :: ALCdevice -> Ptr ALCchar -> IO ALCenum
 
 --------------------------------------------------------------------------------

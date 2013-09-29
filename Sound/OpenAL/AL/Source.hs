@@ -123,13 +123,13 @@ instance GeneratableObjectName Source where
          alGenSources (fromIntegral n) buf
          peekArray n buf
 
-foreign import CALLCONV unsafe "alGenSources"
+foreign import ccall unsafe "alGenSources"
    alGenSources :: ALsizei -> Ptr Source -> IO ()
 
-foreign import CALLCONV unsafe "alDeleteSources"
+foreign import ccall unsafe "alDeleteSources"
    alDeleteSources :: ALsizei -> Ptr Source -> IO ()
 
-foreign import CALLCONV unsafe "alIsSource"
+foreign import ccall unsafe "alIsSource"
    alIsSource :: Source -> IO ALboolean
 
 --------------------------------------------------------------------------------
@@ -596,20 +596,20 @@ makeSourceGettableStateVar dict name source =
 
 --------------------------------------------------------------------------------
 
-foreign import CALLCONV unsafe "alGetSourcefv"
+foreign import ccall unsafe "alGetSourcefv"
    alGetSourcefv :: Source -> ALenum -> Ptr ALfloat -> IO ()
 
-foreign import CALLCONV unsafe "alSourcefv"
+foreign import ccall unsafe "alSourcefv"
    alSourcefv :: Source -> ALenum -> Ptr ALfloat -> IO ()
 
-foreign import CALLCONV unsafe "alGetSourceiv"
+foreign import ccall unsafe "alGetSourceiv"
    alGetSourceiv :: Source ->  ALenum -> Ptr ALint -> IO ()
 
 -- Note: Older OpenAL implementations have no alSourceiv, so we emulate it here.
 alSourceiv :: Source -> ALenum -> Ptr ALint -> IO ()
 alSourceiv source n buf =  peek buf >>= alSourcei source n
 
-foreign import CALLCONV unsafe "alSourcei"
+foreign import ccall unsafe "alSourcei"
    alSourcei :: Source -> ALenum -> ALint -> IO ()
 
 --------------------------------------------------------------------------------
@@ -660,7 +660,7 @@ queueBuffers = withArraySizei . alSourceQueueBuffers
 withArraySizei :: Storable a => (ALsizei -> Ptr a -> IO ()) -> [a] -> IO ()
 withArraySizei f xs = withArrayLen xs $ f . fromIntegral
 
-foreign import CALLCONV unsafe "alSourceQueueBuffers"
+foreign import ccall unsafe "alSourceQueueBuffers"
    alSourceQueueBuffers :: Source -> ALsizei -> Ptr Buffer -> IO ()
 
 --------------------------------------------------------------------------------
@@ -684,7 +684,7 @@ unqueueBuffers src n = allocaArray (fromIntegral n) $ \p -> do
     alSourceUnqueueBuffers src n p
     peekArray (fromIntegral n) p
 
-foreign import CALLCONV unsafe "alSourceUnqueueBuffers"
+foreign import ccall unsafe "alSourceUnqueueBuffers"
    alSourceUnqueueBuffers :: Source -> ALsizei -> Ptr Buffer -> IO ()
 
 --------------------------------------------------------------------------------
@@ -727,7 +727,7 @@ sourceState source =
 play :: [Source] -> IO ()
 play = withArraySizei alSourcePlayv
 
-foreign import CALLCONV unsafe "alSourcePlayv"
+foreign import ccall unsafe "alSourcePlayv"
    alSourcePlayv :: ALsizei -> Ptr Source -> IO ()
 
 -- | 'pause' applied to an 'Initial' source is a legal NOP. 'pause' applied to a
@@ -738,7 +738,7 @@ foreign import CALLCONV unsafe "alSourcePlayv"
 pause :: [Source] -> IO ()
 pause = withArraySizei alSourcePausev
 
-foreign import CALLCONV unsafe "alSourcePausev"
+foreign import ccall unsafe "alSourcePausev"
    alSourcePausev :: ALsizei -> Ptr Source -> IO ()
 
 -- | 'stop' applied to an 'Initial' source is a legal NOP. 'stop' applied to a
@@ -750,7 +750,7 @@ foreign import CALLCONV unsafe "alSourcePausev"
 stop :: [Source] -> IO ()
 stop = withArraySizei alSourceStopv
 
-foreign import CALLCONV unsafe "alSourceStopv"
+foreign import ccall unsafe "alSourceStopv"
    alSourceStopv :: ALsizei -> Ptr Source -> IO ()
 
 -- | 'rewind' applied to an 'Initial' source is a legal NOP. 'rewind' applied to
@@ -765,5 +765,5 @@ foreign import CALLCONV unsafe "alSourceStopv"
 rewind :: [Source] -> IO ()
 rewind = withArraySizei alSourceRewindv
 
-foreign import CALLCONV unsafe "alSourceRewindv"
+foreign import ccall unsafe "alSourceRewindv"
    alSourceRewindv :: ALsizei -> Ptr Source -> IO ()

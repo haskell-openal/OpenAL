@@ -143,7 +143,7 @@ setBufferData :: Buffer -> BufferData a -> IO ()
 setBufferData buffer (BufferData (MemoryRegion raw size) format frequency) =
       alBufferData buffer (marshalFormat format) raw size (round frequency)
 
-foreign import CALLCONV unsafe "alBufferData"
+foreign import ccall unsafe "alBufferData"
    alBufferData :: Buffer -> ALenum -> Ptr a -> ALsizei -> ALsizei -> IO ()
 
 --------------------------------------------------------------------------------
@@ -180,5 +180,5 @@ getBufferi buffer query =
       alGetBufferi buffer (marshalBufferQuery query) buf
       peek1 fromIntegral buf
 
-foreign import CALLCONV unsafe "alGetBufferi"
+foreign import ccall unsafe "alGetBufferi"
    alGetBufferi :: Buffer -> ALenum -> Ptr ALint -> IO ()

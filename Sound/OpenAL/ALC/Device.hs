@@ -191,7 +191,7 @@ openDevice maybeDeviceSpec =
             (flip withALCString alcOpenDevice)
             maybeDeviceSpec
 
-foreign import CALLCONV unsafe "alcOpenDevice"
+foreign import ccall unsafe "alcOpenDevice"
    alcOpenDevice :: Ptr ALCchar -> IO ALCdevice
 
 --------------------------------------------------------------------------------

@@ -106,7 +106,7 @@ createContext device attributes = do
    fmap unmarshalContext .
       withArray0 0 attrs . alcCreateContext . marshalDevice $ device
 
-foreign import CALLCONV unsafe "alcCreateContext"
+foreign import ccall unsafe "alcCreateContext"
    alcCreateContext :: ALCdevice -> Ptr ALCint -> IO ALCcontext
 
 --------------------------------------------------------------------------------
@@ -125,7 +125,7 @@ currentContext = makeStateVar getCurrentContext makeContextCurrent
 getCurrentContext :: IO (Maybe Context)
 getCurrentContext = fmap unmarshalContext $ alcGetCurrentContext
 
-foreign import CALLCONV unsafe "alcGetCurrentContext"
+foreign import ccall unsafe "alcGetCurrentContext"
    alcGetCurrentContext :: IO ALCcontext
 
 makeContextCurrent :: Maybe Context -> IO ()
@@ -156,7 +156,7 @@ processContext = fmap (const ()) . alcProcessContext . marshalContext
 suspendContext :: Context -> IO ()
 suspendContext = alcSuspendContext . marshalContext
 
-foreign import CALLCONV unsafe "alcSuspendContext"
+foreign import ccall unsafe "alcSuspendContext"
    alcSuspendContext :: ALCcontext -> IO ()
 
 --------------------------------------------------------------------------------
@@ -179,7 +179,7 @@ contextsDevice =
    makeGettableStateVar .
       fmap unmarshalDevice . alcGetContextsDevice . marshalContext
 
-foreign import CALLCONV unsafe "alcGetContextsDevice"
+foreign import ccall unsafe "alcGetContextsDevice"
    alcGetContextsDevice :: ALCcontext -> IO ALCdevice
 
 --------------------------------------------------------------------------------

@@ -65,7 +65,7 @@ getStringRaw maybeDevice =
 marshalMaybeDevice :: Maybe Device -> ALCdevice
 marshalMaybeDevice = marshalDevice . maybe nullDevice id
 
-foreign import CALLCONV unsafe "alcGetString"
+foreign import ccall unsafe "alcGetString"
    alcGetString :: ALCdevice -> ALCenum -> IO (Ptr ALCchar)
 
 --------------------------------------------------------------------------------
@@ -101,7 +101,7 @@ getIntegerv maybeDevice query numALCints =
                            (marshalIntQuery query) numALCints buf
          peekArray n buf
 
-foreign import CALLCONV unsafe "alcGetIntegerv"
+foreign import ccall unsafe "alcGetIntegerv"
    alcGetIntegerv :: ALCdevice -> ALCenum -> ALCsizei -> Ptr ALCint -> IO ()
 
 --------------------------------------------------------------------------------
@@ -119,5 +119,5 @@ alcIsExtensionPresent maybeDevice extensionName = makeGettableStateVar $
       withALCString extensionName $
          alcIsExtensionPresent_ (marshalMaybeDevice maybeDevice)
 
-foreign import CALLCONV unsafe "alcIsExtensionPresent"
+foreign import ccall unsafe "alcIsExtensionPresent"
    alcIsExtensionPresent_ :: ALCdevice -> Ptr ALCchar -> IO ALCboolean

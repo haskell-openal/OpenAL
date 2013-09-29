@@ -145,7 +145,7 @@ closeDevice :: Device -> IO Bool
 -- inlined unmarshalALCboolean here to break dependency cycle
 closeDevice = fmap (/= 0) . alcCloseDevice . marshalDevice
 
-foreign import CALLCONV unsafe "alcCloseDevice"
+foreign import ccall unsafe "alcCloseDevice"
    alcCloseDevice :: ALCdevice -> IO ALCboolean
 
 --------------------------------------------------------------------------------
@@ -174,19 +174,19 @@ unmarshalContext context =
 --------------------------------------------------------------------------------
 -- In ancient times, alcProcessContext returned ALCcontext.
 
-foreign import CALLCONV unsafe "alcProcessContext"
+foreign import ccall unsafe "alcProcessContext"
    alcProcessContext :: ALCcontext -> IO ()
 
 --------------------------------------------------------------------------------
 -- In OpenAL 1.1, alcMakeContextCurrent() returns void, before it was ALCenum on
 -- Linux and ALCboolean on other platforms.
 
-foreign import CALLCONV unsafe "alcMakeContextCurrent"
+foreign import ccall unsafe "alcMakeContextCurrent"
    alcMakeContextCurrent :: ALCcontext -> IO ALCboolean
 
 --------------------------------------------------------------------------------
 -- In OpenAL 1.1, alcDestroyContext() returns void, before it returned ALCenum
 -- on Linux.
 
-foreign import CALLCONV unsafe "alcDestroyContext"
+foreign import ccall unsafe "alcDestroyContext"
    alcDestroyContext :: ALCcontext -> IO ()

@@ -67,12 +67,12 @@ makeDopplerVar p apiEntryName =
          funPtr <- get (alProcAddress apiEntryName)
          invokeWithFloat funPtr value)
 
-foreign import CALLCONV unsafe "alGetFloat"
+foreign import ccall unsafe "alGetFloat"
    alGetFloat :: ALenum -> IO ALfloat
 
 type Invoker a = FunPtr a -> a
 
-foreign import CALLCONV unsafe "dynamic"
+foreign import ccall unsafe "dynamic"
    invokeWithFloat :: Invoker (ALfloat -> IO ()) 
 
 --------------------------------------------------------------------------------
