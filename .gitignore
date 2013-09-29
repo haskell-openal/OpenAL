@@ -1,12 +1,5 @@
 *.exe
 *.hi
 *.o
-/OpenAL.buildinfo
-/autom4te.cache/
-/config.log
-/config.status
-/configure
 /dist/
 /examples/test/TestDevice
-/include/HsOpenAL.h
-/include/HsOpenALConfig.h

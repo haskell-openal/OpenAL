@@ -15,24 +15,8 @@ description:
 build-type: Simple
 cabal-version:  >= 1.6
 extra-source-files:
-        OpenAL.buildinfo.in
         README.md
-        aclocal.m4
-        config.guess
-        config.sub
-        configure
-        configure.ac
         examples/test/TestDevice.hs
-        include/HsOpenAL.h.in
-        include/HsOpenALConfig.h.in
-        install-sh
-extra-tmp-files:
-        config.log
-        config.status
-        autom4te.cache
-        OpenAL.buildinfo
-        include/HsOpenALConfig.h
-        include/HsOpenAL.h
 
 flag UseNativeWindowsLibraries
    description:
