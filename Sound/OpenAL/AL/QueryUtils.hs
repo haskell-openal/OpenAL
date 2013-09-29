@@ -1,3 +1,4 @@
+{-# LANGUAGE ForeignFunctionInterface, CPP #-}
 {-# OPTIONS_HADDOCK hide #-}
 --------------------------------------------------------------------------------
 -- |
@@ -18,6 +19,7 @@ module Sound.OpenAL.AL.QueryUtils (
    StringName(..), getString
 ) where
 
+import Foreign.C.Types
 import Foreign.Ptr ( Ptr )
 import Sound.OpenAL.AL.BasicTypes ( ALchar, ALenum )
 import Sound.OpenAL.AL.String ( peekALString )

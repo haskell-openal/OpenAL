@@ -1,3 +1,4 @@
+{-# LANGUAGE ForeignFunctionInterface, CPP #-}
 --------------------------------------------------------------------------------
 -- |
 -- Module      :  Sound.OpenAL.AL.Buffer
@@ -69,6 +70,7 @@ module Sound.OpenAL.AL.Buffer (
 ) where
 
 import Graphics.Rendering.OpenGL.GL.StateVar
+import Foreign.C.Types
 import Foreign.Marshal.Alloc ( alloca )
 import Foreign.Ptr ( Ptr, nullPtr )
 import Sound.OpenAL.AL.BufferInternal ( Buffer(..) )

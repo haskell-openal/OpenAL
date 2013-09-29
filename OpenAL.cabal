@@ -12,7 +12,7 @@ description:
         appropriate for use with gaming applications and many other
         types of audio applications.  For more information about OpenAL,
         please see: <http://connect.creativelabs.com/openal/>.
-build-type: Configure
+build-type: Simple
 cabal-version:  >= 1.6
 extra-source-files:
         OpenAL.buildinfo.in
@@ -33,6 +33,12 @@ extra-tmp-files:
         OpenAL.buildinfo
         include/HsOpenALConfig.h
         include/HsOpenAL.h
+
+flag UseNativeWindowsLibraries
+   description:
+      When compiling under Windows, use the native libraries instead of e.g. the
+      ones coming with Cygwin.
+
 library
     exposed-modules:
             Sound.OpenAL,
@@ -66,13 +72,17 @@ library
             Sound.OpenAL.ALC.String,
             Sound.OpenAL.Config,
             Sound.OpenAL.Constants
-    include-dirs: include
-    includes: HsOpenAL.h
-    install-includes: HsOpenAL.h
-    ghc-options: -Wall -O2
     build-depends: base >= 3 && < 5, OpenGL >= 2.9.0.0
-    extensions: CPP, ForeignFunctionInterface
+    ghc-options: -Wall -O2
+    cpp-options: "-DCALLCONV=ccall"
+    if os(windows) && flag(UseNativeWindowsLibraries)
+      extra-libraries: OpenAL32
+    else
+      if os(darwin) || os(ios)
+        frameworks: OpenAL
+      else
+        extra-libraries: AL
 
 source-repository head
   type: git
-  location: https://github.com/haskell-openal/ALUT
+  location: https://github.com/haskell-openal/OpenAL

@@ -1,3 +1,4 @@
+{-# LANGUAGE ForeignFunctionInterface, CPP #-}
 {-# OPTIONS_HADDOCK hide #-}
 --------------------------------------------------------------------------------
 -- |
@@ -19,6 +20,7 @@ module Sound.OpenAL.AL.BufferInternal (
 
 import Graphics.Rendering.OpenGL.GL.ObjectName
 import Foreign.Marshal.Array ( withArrayLen, peekArray, allocaArray )
+import Foreign.C.Types
 import Foreign.Ptr ( Ptr, castPtr )
 import Foreign.Storable ( Storable(..) )
 import Sound.OpenAL.AL.ALboolean ( unmarshalALboolean )

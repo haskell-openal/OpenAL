@@ -1,3 +1,4 @@
+{-# LANGUAGE ForeignFunctionInterface, CPP #-}
 {-# OPTIONS_HADDOCK hide #-}
 --------------------------------------------------------------------------------
 -- |
@@ -31,91 +32,86 @@ module Sound.OpenAL.Config (
    alcProcessContext, alcMakeContextCurrent, alcDestroyContext
 ) where
 
-import Data.Int
-import Data.Word
+import Foreign.C.Types
 import Foreign.Ptr ( Ptr, nullPtr )
-
---------------------------------------------------------------------------------
-
-#include "HsOpenALConfig.h"
 
 --------------------------------------------------------------------------------
 -- AL types
 
 -- | 8-bit boolean
-type ALboolean = HTYPE_ALBOOLEAN
+type ALboolean = CChar
 
 -- | Character
-type ALchar = HTYPE_ALCHAR
+type ALchar = CChar
 
 -- | Signed 8-bit 2\'s complement integer
-type ALbyte = HTYPE_ALBYTE
+type ALbyte = CSChar
 
 -- | Unsigned 8-bit integer
-type ALubyte = HTYPE_ALUBYTE
+type ALubyte = CUChar
 
 -- | Signed 16-bit 2\'s complement integer
-type ALshort = HTYPE_ALSHORT
+type ALshort = CShort
 
 -- | Unsigned 16-bit integer
-type ALushort = HTYPE_ALUSHORT
+type ALushort = CUShort
 
 -- | Signed 32-bit 2\'s complement integer
-type ALint = HTYPE_ALINT
+type ALint = CInt
 
 -- | Unsigned 32-bit integer
-type ALuint = HTYPE_ALUINT
+type ALuint = CUInt
 
 -- | Non-negatitve 32-bit binary integer size
-type ALsizei = HTYPE_ALSIZEI
+type ALsizei = CInt
 
 -- | Enumerated 32-bit value
-type ALenum = HTYPE_ALENUM
+type ALenum = CInt
 
 -- | 32-bit IEEE754 floating-point
-type ALfloat = HTYPE_ALFLOAT
+type ALfloat = CFloat
 
 -- | 64-bit IEEE754 floating-point
-type ALdouble = HTYPE_ALDOUBLE
+type ALdouble = CDouble
 
 --------------------------------------------------------------------------------
 -- ALC types
 
 -- | 8-bit boolean
-type ALCboolean = HTYPE_ALCBOOLEAN
+type ALCboolean = CChar
 
 -- | Character
-type ALCchar = HTYPE_ALCCHAR
+type ALCchar = CChar
 
 -- | Signed 8-bit 2\'s complement integer
-type ALCbyte = HTYPE_ALCBYTE
+type ALCbyte = CSChar
 
 -- | Unsigned 8-bit integer
-type ALCubyte = HTYPE_ALCUBYTE
+type ALCubyte = CUChar
 
 -- | Signed 16-bit 2\'s complement integer
-type ALCshort = HTYPE_ALCSHORT
+type ALCshort = CShort
 
 -- | Unsigned 16-bit integer
-type ALCushort = HTYPE_ALCUSHORT
+type ALCushort = CUShort
 
 -- | Signed 32-bit 2\'s complement integer
-type ALCint = HTYPE_ALCINT
+type ALCint = CInt
 
 -- | Unsigned 32-bit integer
-type ALCuint = HTYPE_ALCUINT
+type ALCuint = CUInt
 
 -- | Non-negatitve 32-bit binary integer size
-type ALCsizei = HTYPE_ALCSIZEI
+type ALCsizei = CInt
 
 -- | Enumerated 32-bit value
-type ALCenum = HTYPE_ALCENUM
+type ALCenum = CInt
 
 -- | 32-bit IEEE754 floating-point
-type ALCfloat = HTYPE_ALCFLOAT
+type ALCfloat = CFloat
 
 -- | 64-bit IEEE754 floating-point
-type ALCdouble = HTYPE_ALCDOUBLE
+type ALCdouble = CDouble
 
 --------------------------------------------------------------------------------
 -- In OpenAL 1.1, alcCloseDevice() returns an ALCboolean, before it was void.
@@ -146,23 +142,11 @@ unmarshalDevice device =
 -- /Note:/ Older OpenAL implementations will always report a success!
 
 closeDevice :: Device -> IO Bool
-
-#if ALCCLOSEDEVICE_VOID
-
-closeDevice = fmap (const True) . alcCloseDevice . marshalDevice
-
-foreign import CALLCONV unsafe "alcCloseDevice"
-   alcCloseDevice :: ALCdevice -> IO ()
-
-#else
-
 -- inlined unmarshalALCboolean here to break dependency cycle
-closeDevice = fmap (/= CONST_ALC_FALSE) . alcCloseDevice . marshalDevice
+closeDevice = fmap (/= 0) . alcCloseDevice . marshalDevice
 
 foreign import CALLCONV unsafe "alcCloseDevice"
    alcCloseDevice :: ALCdevice -> IO ALCboolean
-
-#endif
 
 --------------------------------------------------------------------------------
 -- In OpenAL 1.1, alcProcessContext() returns void for all platforms, before it
@@ -187,47 +171,22 @@ unmarshalContext :: ALCcontext -> Maybe Context
 unmarshalContext context =
    if context == marshalContext nullContext then Nothing else Just (Context context)
 
-#if ALCPROCESSCONTEXT_VOID
+--------------------------------------------------------------------------------
+-- In ancient times, alcProcessContext returned ALCcontext.
 
 foreign import CALLCONV unsafe "alcProcessContext"
    alcProcessContext :: ALCcontext -> IO ()
 
-#else
-
-foreign import CALLCONV unsafe "alcProcessContext"
-   alcProcessContext :: ALCcontext -> IO ALCcontext
-
-#endif
-
 --------------------------------------------------------------------------------
 -- In OpenAL 1.1, alcMakeContextCurrent() returns void, before it was ALCenum on
--- Linux and ALCboolean on other platforms. Currently we default to ALCenum in
--- the latter case.
-
-#if ALCMAKECONTEXTCURRENT_VOID
+-- Linux and ALCboolean on other platforms.
 
 foreign import CALLCONV unsafe "alcMakeContextCurrent"
-   alcMakeContextCurrent :: ALCcontext -> IO ()
-
-#else
-
-foreign import CALLCONV unsafe "alcMakeContextCurrent"
-   alcMakeContextCurrent :: ALCcontext -> IO ALCenum
-
-#endif
+   alcMakeContextCurrent :: ALCcontext -> IO ALCboolean
 
 --------------------------------------------------------------------------------
 -- In OpenAL 1.1, alcDestroyContext() returns void, before it returned ALCenum
 -- on Linux.
 
-#if ALCDESTROYCONTEXT_VOID
-
 foreign import CALLCONV unsafe "alcDestroyContext"
    alcDestroyContext :: ALCcontext -> IO ()
-
-#else
-
-foreign import CALLCONV unsafe "alcDestroyContext"
-   alcDestroyContext :: ALCcontext -> IO ALCenum
-
-#endif

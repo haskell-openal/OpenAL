@@ -1,3 +1,4 @@
+{-# LANGUAGE ForeignFunctionInterface, CPP #-}
 --------------------------------------------------------------------------------
 -- |
 -- Module      :  Sound.OpenAL.AL.Source
@@ -79,6 +80,7 @@ import Control.Monad
 import Graphics.Rendering.OpenGL.GL.ObjectName
 import Graphics.Rendering.OpenGL.GL.StateVar
 import Graphics.Rendering.OpenGL.GL.Tensor
+import Foreign.C.Types
 import Foreign.Marshal.Array
 import Foreign.Marshal.Utils
 import Foreign.Ptr

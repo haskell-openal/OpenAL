@@ -1,3 +1,4 @@
+{-# LANGUAGE ForeignFunctionInterface, CPP #-}
 --------------------------------------------------------------------------------
 -- |
 -- Module      :  Sound.OpenAL.AL.Doppler
@@ -20,6 +21,7 @@ module Sound.OpenAL.AL.Doppler (
 ) where
 
 import Graphics.Rendering.OpenGL.GL.StateVar
+import Foreign.C.Types
 import Foreign.Ptr ( FunPtr )
 import Sound.OpenAL.AL.BasicTypes ( ALenum, ALfloat )
 import Sound.OpenAL.AL.Extensions ( alProcAddress )

@@ -1,3 +1,4 @@
+{-# LANGUAGE ForeignFunctionInterface, CPP #-}
 --------------------------------------------------------------------------------
 -- |
 -- Module      :  Sound.OpenAL.AL.Listener
@@ -33,6 +34,7 @@ module Sound.OpenAL.AL.Listener (
 
 import Graphics.Rendering.OpenGL.GL.StateVar
 import Graphics.Rendering.OpenGL.GL.Tensor
+import Foreign.C.Types
 import Foreign.Marshal.Array
 import Foreign.Marshal.Utils
 import Foreign.Ptr

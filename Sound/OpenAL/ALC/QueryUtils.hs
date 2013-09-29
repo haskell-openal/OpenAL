@@ -1,3 +1,4 @@
+{-# LANGUAGE ForeignFunctionInterface, CPP #-}
 {-# OPTIONS_HADDOCK hide #-}
 --------------------------------------------------------------------------------
 -- |
@@ -19,6 +20,7 @@ module Sound.OpenAL.ALC.QueryUtils (
 
 import Control.Monad ( when )
 import Graphics.Rendering.OpenGL.GL.StateVar
+import Foreign.C.Types
 import Foreign.Marshal.Array ( withArray, peekArray )
 import Foreign.Ptr ( Ptr )
 import Sound.OpenAL.ALC.ALCboolean ( unmarshalALCboolean )

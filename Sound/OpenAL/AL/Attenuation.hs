@@ -1,3 +1,4 @@
+{-# LANGUAGE ForeignFunctionInterface, CPP #-}
 --------------------------------------------------------------------------------
 -- |
 -- Module      :  Sound.OpenAL.AL.Attenuation
@@ -28,6 +29,7 @@ module Sound.OpenAL.AL.Attenuation (
 ) where
 
 import Graphics.Rendering.OpenGL.GL.StateVar
+import Foreign.C.Types
 import Foreign.Marshal.Alloc ( alloca )
 import Foreign.Ptr ( Ptr )
 import Sound.OpenAL.AL.BasicTypes ( ALint, ALenum )

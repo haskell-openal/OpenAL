@@ -1,3 +1,4 @@
+{-# LANGUAGE ForeignFunctionInterface, CPP #-}
 --------------------------------------------------------------------------------
 -- |
 -- Module      :  Sound.OpenAL.ALC.Capture
@@ -21,6 +22,7 @@ module Sound.OpenAL.ALC.Capture (
 ) where
 
 import Graphics.Rendering.OpenGL.GL.StateVar
+import Foreign.C.Types
 import Foreign.Ptr ( Ptr, nullPtr, FunPtr )
 import Sound.OpenAL.AL.Buffer ( Format )
 import Sound.OpenAL.AL.Format ( marshalFormat )

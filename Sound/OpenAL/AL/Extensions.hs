@@ -1,3 +1,4 @@
+{-# LANGUAGE ForeignFunctionInterface, CPP #-}
 --------------------------------------------------------------------------------
 -- |
 -- Module      :  Sound.OpenAL.AL.Extensions
@@ -19,6 +20,7 @@ module Sound.OpenAL.AL.Extensions (
 ) where
 
 import Graphics.Rendering.OpenGL.GL.StateVar
+import Foreign.C.Types
 import Foreign.Ptr ( Ptr, FunPtr )
 import Sound.OpenAL.AL.ALboolean ( unmarshalALboolean )
 import Sound.OpenAL.AL.BasicTypes ( ALboolean, ALchar, ALenum )

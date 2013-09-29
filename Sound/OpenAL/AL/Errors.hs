@@ -1,3 +1,4 @@
+{-# LANGUAGE ForeignFunctionInterface, CPP #-}
 --------------------------------------------------------------------------------
 -- |
 -- Module      :  Sound.OpenAL.AL.Errors
@@ -17,6 +18,7 @@ module Sound.OpenAL.AL.Errors (
    ALError(..), ALErrorCategory(..), alErrors
 ) where
 
+import Foreign.C.Types
 import Graphics.Rendering.OpenGL.GL.StateVar
 import Sound.OpenAL.AL.BasicTypes ( ALenum )
 import Sound.OpenAL.Constants (
