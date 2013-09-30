@@ -1,4 +1,5 @@
-{-# LANGUAGE ForeignFunctionInterface, CPP #-}
+{-# LANGUAGE ForeignFunctionInterface #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
 --------------------------------------------------------------------------------
 -- |
 -- Module      :  Sound.OpenAL.ALC.Context
@@ -27,24 +28,18 @@ module Sound.OpenAL.ALC.Context (
    processContext, suspendContext, destroyContext, contextsDevice, allAttributes
 ) where
 
-
+import Foreign.Marshal.Array
+import Foreign.Ptr
 import Graphics.Rendering.OpenGL.GL.StateVar
-import Foreign.Marshal.Array ( withArray0 )
-import Foreign.Ptr ( Ptr )
-import Sound.OpenAL.ALC.BasicTypes ( ALCint )
-import Sound.OpenAL.ALC.ALCboolean ( marshalALCboolean, unmarshalALCboolean )
-import Sound.OpenAL.ALC.Device ( Device )
-import Sound.OpenAL.ALC.QueryUtils ( IntQuery(..), getInteger, getIntegerv )
-import Sound.OpenAL.Config (
-   ALCdevice(..), marshalDevice, unmarshalDevice,
-   ALCcontext(..), Context, nullContext, marshalContext, unmarshalContext,
-   alcProcessContext, alcDestroyContext, alcMakeContextCurrent )
-import Sound.OpenAL.Constants (
-   alc_FREQUENCY, alc_REFRESH, alc_SYNC, alc_MONO_SOURCES, alc_STEREO_SOURCES )
+import Sound.OpenAL.ALC.ALCboolean
+import Sound.OpenAL.ALC.BasicTypes
+import Sound.OpenAL.ALC.Device
+import Sound.OpenAL.ALC.QueryUtils
+import Sound.OpenAL.Config
+import Sound.OpenAL.Constants
 
-#ifdef __HADDOCK__
-import Sound.OpenAL.ALC.Errors ( ALCErrorCategory(..) )
-#endif
+-- For Haddock only.
+import Sound.OpenAL.ALC.Errors
 
 --------------------------------------------------------------------------------
 

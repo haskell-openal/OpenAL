@@ -1,4 +1,5 @@
-{-# LANGUAGE ForeignFunctionInterface, CPP #-}
+{-# LANGUAGE ForeignFunctionInterface #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
 --------------------------------------------------------------------------------
 -- |
 -- Module      :  Sound.OpenAL.AL.Doppler
@@ -20,17 +21,15 @@ module Sound.OpenAL.AL.Doppler (
    dopplerFactor, speedOfSound
 ) where
 
-import Graphics.Rendering.OpenGL.GL.StateVar
 import Foreign.C.Types
-import Foreign.Ptr ( FunPtr )
-import Sound.OpenAL.AL.BasicTypes ( ALenum, ALfloat )
-import Sound.OpenAL.AL.Extensions ( alProcAddress )
-import Sound.OpenAL.AL.QueryUtils (
-   GetPName(GetDopplerFactor,GetSpeedOfSound), marshalGetPName )
+import Foreign.Ptr
+import Graphics.Rendering.OpenGL.GL.StateVar
+import Sound.OpenAL.AL.BasicTypes
+import Sound.OpenAL.AL.Extensions
+import Sound.OpenAL.AL.QueryUtils
 
-#ifdef __HADDOCK__
-import Sound.OpenAL.AL.Errors ( ALError(ALInvalidValue) )
-#endif
+-- For Haddock only.
+import Sound.OpenAL.AL.Errors
 
 --------------------------------------------------------------------------------
 

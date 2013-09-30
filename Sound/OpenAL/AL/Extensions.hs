@@ -1,4 +1,4 @@
-{-# LANGUAGE ForeignFunctionInterface, CPP #-}
+{-# LANGUAGE ForeignFunctionInterface #-}
 --------------------------------------------------------------------------------
 -- |
 -- Module      :  Sound.OpenAL.AL.Extensions
@@ -19,17 +19,13 @@ module Sound.OpenAL.AL.Extensions (
    alExtensions, alIsExtensionPresent, alProcAddress, alEnumValue, alVersion
 ) where
 
-import Graphics.Rendering.OpenGL.GL.StateVar
 import Foreign.C.Types
-import Foreign.Ptr ( Ptr, FunPtr )
-import Sound.OpenAL.AL.ALboolean ( unmarshalALboolean )
-import Sound.OpenAL.AL.BasicTypes ( ALboolean, ALchar, ALenum )
-import Sound.OpenAL.AL.QueryUtils ( StringName(..), getString )
-import Sound.OpenAL.AL.String ( withALString )
-
-#ifdef __HADDOCK__
-import Foreign.Ptr ( nullFunPtr )
-#endif
+import Foreign.Ptr
+import Graphics.Rendering.OpenGL.GL.StateVar
+import Sound.OpenAL.AL.ALboolean
+import Sound.OpenAL.AL.BasicTypes
+import Sound.OpenAL.AL.QueryUtils
+import Sound.OpenAL.AL.String
 
 --------------------------------------------------------------------------------
 

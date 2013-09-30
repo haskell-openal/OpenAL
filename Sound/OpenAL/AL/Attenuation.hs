@@ -1,4 +1,5 @@
-{-# LANGUAGE ForeignFunctionInterface, CPP #-}
+{-# LANGUAGE ForeignFunctionInterface #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
 --------------------------------------------------------------------------------
 -- |
 -- Module      :  Sound.OpenAL.AL.Attenuation
@@ -28,24 +29,17 @@ module Sound.OpenAL.AL.Attenuation (
    -- $NoCullingByDistance
 ) where
 
-import Graphics.Rendering.OpenGL.GL.StateVar
 import Foreign.C.Types
-import Foreign.Marshal.Alloc ( alloca )
-import Foreign.Ptr ( Ptr )
-import Sound.OpenAL.AL.BasicTypes ( ALint, ALenum )
-import Sound.OpenAL.AL.PeekPoke ( peek1 )
-import Sound.OpenAL.AL.QueryUtils (
-   GetPName(GetDistanceModel), marshalGetPName )
-import Sound.OpenAL.Constants (
-   al_NONE, al_INVERSE_DISTANCE, al_INVERSE_DISTANCE_CLAMPED,
-   al_LINEAR_DISTANCE, al_LINEAR_DISTANCE_CLAMPED, al_EXPONENT_DISTANCE,
-   al_EXPONENT_DISTANCE_CLAMPED )
+import Foreign.Marshal.Alloc
+import Foreign.Ptr
+import Graphics.Rendering.OpenGL.GL.StateVar
+import Sound.OpenAL.AL.BasicTypes
+import Sound.OpenAL.AL.PeekPoke
+import Sound.OpenAL.AL.QueryUtils
+import Sound.OpenAL.Constants
 
-#ifdef __HADDOCK__
-import Sound.OpenAL.AL.Source (
-   sourceGain, gainBounds, coneAngles, coneOuterGain, referenceDistance,
-   rolloffFactor, maxDistance )
-#endif
+-- For Haddock only.
+import Sound.OpenAL.AL.Source
 
 --------------------------------------------------------------------------------
 -- $Introduction

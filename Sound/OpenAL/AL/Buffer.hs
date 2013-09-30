@@ -1,4 +1,5 @@
-{-# LANGUAGE ForeignFunctionInterface, CPP #-}
+{-# LANGUAGE ForeignFunctionInterface #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
 --------------------------------------------------------------------------------
 -- |
 -- Module      :  Sound.OpenAL.AL.Buffer
@@ -69,43 +70,28 @@ module Sound.OpenAL.AL.Buffer (
    Buffer, MemoryRegion(..), Format(..), BufferData(..), bufferData
 ) where
 
-import Graphics.Rendering.OpenGL.GL.StateVar
 import Foreign.C.Types
-import Foreign.Marshal.Alloc ( alloca )
-import Foreign.Ptr ( Ptr, nullPtr )
-import Sound.OpenAL.AL.BufferInternal ( Buffer(..) )
-import Sound.OpenAL.AL.BasicTypes ( ALint, ALsizei, ALenum )
-import Sound.OpenAL.AL.Format ( Format(..), marshalFormat )
-import Sound.OpenAL.AL.PeekPoke ( peek1 )
+import Foreign.Marshal.Alloc
+import Foreign.Ptr
+import Graphics.Rendering.OpenGL.GL.StateVar
+import Sound.OpenAL.AL.BasicTypes
+import Sound.OpenAL.AL.BufferInternal
+import Sound.OpenAL.AL.Format
+import Sound.OpenAL.AL.PeekPoke
 import Sound.OpenAL.ALC.Context ( Frequency )
-import Sound.OpenAL.Constants ( al_FREQUENCY, al_SIZE, al_BITS, al_CHANNELS )
+import Sound.OpenAL.Constants
 
-#ifdef __HADDOCK__
-import Sound.OpenAL.AL.SourceState ( SourceState(..) )
-import Sound.OpenAL.AL.Errors ( ALErrorCategory(..) )
-#endif
+-- For Haddock only.
+import Sound.OpenAL.AL.Errors
+import Sound.OpenAL.AL.SourceState
 
 --------------------------------------------------------------------------------
 
 data MemoryRegion a = MemoryRegion (Ptr a) ALsizei
-#ifdef __HADDOCK__
--- Help Haddock a bit, because it doesn't do any instance inference.
-instance Eq (MemoryRegion a)
-instance Ord (MemoryRegion a)
-instance Show (MemoryRegion a)
-#else
    deriving ( Eq, Ord, Show )
-#endif
 
 data BufferData a = BufferData (MemoryRegion a) Format Frequency
-#ifdef __HADDOCK__
--- Help Haddock a bit, because it doesn't do any instance inference.
-instance Eq (BufferData a)
-instance Ord (BufferData a)
-instance Show (BufferData a)
-#else
    deriving ( Eq, Ord, Show )
-#endif
 
 --------------------------------------------------------------------------------
 

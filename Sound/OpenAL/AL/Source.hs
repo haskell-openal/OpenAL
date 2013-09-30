@@ -1,4 +1,5 @@
-{-# LANGUAGE ForeignFunctionInterface, CPP #-}
+{-# LANGUAGE ForeignFunctionInterface #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
 --------------------------------------------------------------------------------
 -- |
 -- Module      :  Sound.OpenAL.AL.Source
@@ -77,14 +78,14 @@ module Sound.OpenAL.AL.Source (
 ) where
 
 import Control.Monad
-import Graphics.Rendering.OpenGL.GL.ObjectName
-import Graphics.Rendering.OpenGL.GL.StateVar
-import Graphics.Rendering.OpenGL.GL.Tensor
 import Foreign.C.Types
 import Foreign.Marshal.Array
 import Foreign.Marshal.Utils
 import Foreign.Ptr
 import Foreign.Storable
+import Graphics.Rendering.OpenGL.GL.ObjectName
+import Graphics.Rendering.OpenGL.GL.StateVar
+import Graphics.Rendering.OpenGL.GL.Tensor
 import Sound.OpenAL.AL.ALboolean
 import Sound.OpenAL.AL.BasicTypes
 import Sound.OpenAL.AL.BufferInternal
@@ -94,10 +95,8 @@ import Sound.OpenAL.AL.QueryUtils
 import Sound.OpenAL.AL.SourceState
 import Sound.OpenAL.Constants
 
-#ifdef __HADDOCK__
-import Sound.OpenAL.AL.Listener ( listenerGain )
-import Sound.OpenAL.AL.Errors ( ALErrorCategory(..) )
-#endif
+-- For Haddock only.
+import Sound.OpenAL.AL.Errors
 
 --------------------------------------------------------------------------------
 
