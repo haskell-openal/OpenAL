@@ -64,7 +64,7 @@ library
       if os(darwin) || os(ios)
         frameworks: OpenAL
       else
-        extra-libraries: AL
+        extra-libraries: openal
 
 source-repository head
   type: git
