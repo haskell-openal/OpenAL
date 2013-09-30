@@ -26,6 +26,4 @@ before_install:
   - ghc-pkg list
 script:
   - cabal install --enable-documentation
-  - pushd examples/test
-  - ghc --make -Wall -O2 TestDevice.hs
-  - popd
+  - ( cd examples/test && ghc --make -Wall -O2 TestDevice.hs )
