@@ -10,8 +10,16 @@ synopsis: A binding to the OpenAL cross-platform 3D audio API
 description:
         A Haskell binding for the OpenAL cross-platform 3D audio API,
         appropriate for use with gaming applications and many other
-        types of audio applications. For more information about OpenAL,
-        please see: <http://connect.creativelabs.com/openal/>.
+        types of audio applications.
+        .
+        On Windows, this package works well with the \"OpenAL Soft\" binary
+        distribution from <http://kcat.strangesoft.net/openal.html>. 
+        Type \'cabal install --extra-lib-dirs=\<DIR\>\' where \<DIR\> is the
+        directory where libOpenAL32.dll.a is located (must be an absolute path).
+        Then rename soft_oal.dll to OpenAL32.dll and put it somewhere in
+        the PATH. I found that c:\\Windows\\ worked.
+        .
+        This package has also been tested on GNU/Linux and iOS.
 build-type: Simple
 cabal-version:  >= 1.6
 extra-source-files:
