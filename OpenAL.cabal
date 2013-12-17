@@ -1,5 +1,5 @@
 name: OpenAL
-version: 1.5.0.0
+version: 1.6.0.0
 license: BSD3
 license-file: LICENSE
 maintainer: Sven Panne <svenpanne@gmail.com>, Stephen Blackheath <haskell.openal.stephen@blacksapphire.com>
@@ -35,15 +35,12 @@ library
     exposed-modules:
             Sound.OpenAL,
             Sound.OpenAL.AL,
-            Sound.OpenAL.AL.ALboolean,
             Sound.OpenAL.AL.Attenuation,
             Sound.OpenAL.AL.BasicTypes,
             Sound.OpenAL.AL.Buffer,
-            Sound.OpenAL.AL.BufferInternal,
             Sound.OpenAL.AL.Doppler,
             Sound.OpenAL.AL.Errors,
             Sound.OpenAL.AL.Extensions,
-            Sound.OpenAL.AL.Format,
             Sound.OpenAL.AL.Listener,
             Sound.OpenAL.AL.Source,
             Sound.OpenAL.AL.StringQueries,
@@ -55,6 +52,9 @@ library
             Sound.OpenAL.ALC.Errors,
             Sound.OpenAL.ALC.Extensions
     other-modules:
+            Sound.OpenAL.AL.ALboolean,
+            Sound.OpenAL.AL.BufferInternal,
+            Sound.OpenAL.AL.Format,
             Sound.OpenAL.AL.PeekPoke,
             Sound.OpenAL.AL.QueryUtils,
             Sound.OpenAL.AL.SourceState,

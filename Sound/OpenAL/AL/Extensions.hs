@@ -16,7 +16,11 @@
 --------------------------------------------------------------------------------
 
 module Sound.OpenAL.AL.Extensions (
-   alExtensions, alIsExtensionPresent, alProcAddress, alEnumValue, alVersion
+   -- * General AL extension support
+   alExtensions, alIsExtensionPresent, alProcAddress, alEnumValue, alVersion,
+
+   -- * Internal re-exports, use at your own risk
+   unmarshalALboolean, unmarshalFormat, unmarshalBuffer
 ) where
 
 import Foreign.C.Types
@@ -24,6 +28,8 @@ import Foreign.Ptr
 import Graphics.Rendering.OpenGL.GL.StateVar
 import Sound.OpenAL.AL.ALboolean
 import Sound.OpenAL.AL.BasicTypes
+import Sound.OpenAL.AL.BufferInternal
+import Sound.OpenAL.AL.Format
 import Sound.OpenAL.AL.QueryUtils
 import Sound.OpenAL.AL.String
 
