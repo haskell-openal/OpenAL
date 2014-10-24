@@ -1,5 +1,9 @@
-*.exe
-*.hi
-*.o
-/dist/
+*.swp
+*~
+/.cabal-sandbox
+/dist
+/examples/**/*.exe
+/examples/**/*.hi
+/examples/**/*.o
 /examples/test/TestDevice
+cabal.sandbox.config
