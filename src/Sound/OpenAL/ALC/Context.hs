@@ -27,9 +27,9 @@ module Sound.OpenAL.ALC.Context (
    processContext, suspendContext, destroyContext, contextsDevice, allAttributes
 ) where
 
+import Data.StateVar
 import Foreign.Marshal.Array
 import Foreign.Ptr
-import Graphics.Rendering.OpenGL.GL.StateVar
 import Sound.OpenAL.ALC.ALCboolean
 import Sound.OpenAL.ALC.BasicTypes
 import Sound.OpenAL.ALC.Device

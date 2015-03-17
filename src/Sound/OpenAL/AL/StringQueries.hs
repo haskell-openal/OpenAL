@@ -17,7 +17,7 @@ module Sound.OpenAL.AL.StringQueries (
    alVendor, alRenderer
 ) where
 
-import Graphics.Rendering.OpenGL.GL.StateVar
+import Data.StateVar
 import Sound.OpenAL.AL.QueryUtils ( StringName(..), getString )
 
 --------------------------------------------------------------------------------

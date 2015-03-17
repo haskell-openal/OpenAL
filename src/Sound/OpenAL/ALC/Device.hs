@@ -26,7 +26,7 @@ module Sound.OpenAL.ALC.Device (
    defaultDeviceSpecifier, deviceSpecifier, allDeviceSpecifiers
 ) where
 
-import Graphics.Rendering.OpenGL.GL.StateVar
+import Data.StateVar
 import Foreign.Ptr ( Ptr, nullPtr )
 import Foreign.Marshal.Utils ( maybePeek )
 import Sound.OpenAL.ALC.BasicTypes ( ALCchar )

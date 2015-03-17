@@ -76,14 +76,15 @@ module Sound.OpenAL.AL.Source (
    SourceState(..), sourceState, play, pause, stop, rewind
 ) where
 
+import Control.Monad.IO.Class ( MonadIO(..) )
 import Control.Monad
+import Data.StateVar
+import Data.ObjectName
 import Foreign.C.Types
 import Foreign.Marshal.Array
 import Foreign.Marshal.Utils
 import Foreign.Ptr
 import Foreign.Storable
-import Graphics.Rendering.OpenGL.GL.ObjectName
-import Graphics.Rendering.OpenGL.GL.StateVar
 import Graphics.Rendering.OpenGL.GL.Tensor
 import Sound.OpenAL.AL.ALboolean
 import Sound.OpenAL.AL.BasicTypes
@@ -111,12 +112,12 @@ instance Storable Source where
    poke ptr   (Source b) = poke1 (castPtr ptr) b
 
 instance ObjectName Source where
-   deleteObjectNames = withArraySizei alDeleteSources
+   deleteObjectNames = liftIO . withArraySizei alDeleteSources
 
-   isObjectName = fmap unmarshalALboolean . alIsSource
+   isObjectName = liftIO . fmap unmarshalALboolean . alIsSource
 
 instance GeneratableObjectName Source where
-   genObjectNames n =
+   genObjectNames n = liftIO $
       allocaArray n $ \buf -> do
          alGenSources (fromIntegral n) buf
          peekArray n buf

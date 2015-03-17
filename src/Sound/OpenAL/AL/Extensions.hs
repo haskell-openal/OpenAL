@@ -22,9 +22,9 @@ module Sound.OpenAL.AL.Extensions (
    unmarshalALboolean, unmarshalFormat, unmarshalBuffer
 ) where
 
+import Data.StateVar
 import Foreign.C.Types
 import Foreign.Ptr
-import Graphics.Rendering.OpenGL.GL.StateVar
 import Sound.OpenAL.AL.ALboolean
 import Sound.OpenAL.AL.BasicTypes
 import Sound.OpenAL.AL.BufferInternal

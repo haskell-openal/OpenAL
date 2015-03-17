@@ -31,13 +31,13 @@ module Sound.OpenAL.AL.Listener (
    listenerPosition, listenerVelocity, Gain, listenerGain, orientation
 ) where
 
-import Graphics.Rendering.OpenGL.GL.StateVar
-import Graphics.Rendering.OpenGL.GL.Tensor
+import Data.StateVar
 import Foreign.C.Types
 import Foreign.Marshal.Array
 import Foreign.Marshal.Utils
 import Foreign.Ptr
 import Foreign.Storable
+import Graphics.Rendering.OpenGL.GL.Tensor
 import Sound.OpenAL.AL.BasicTypes
 import Sound.OpenAL.AL.PeekPoke
 import Sound.OpenAL.AL.QueryUtils

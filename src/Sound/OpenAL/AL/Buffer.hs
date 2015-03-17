@@ -69,10 +69,10 @@ module Sound.OpenAL.AL.Buffer (
    Buffer, MemoryRegion(..), Format(..), BufferData(..), bufferData
 ) where
 
+import Data.StateVar
 import Foreign.C.Types
 import Foreign.Marshal.Alloc
 import Foreign.Ptr
-import Graphics.Rendering.OpenGL.GL.StateVar
 import Sound.OpenAL.AL.BasicTypes
 import Sound.OpenAL.AL.BufferInternal
 import Sound.OpenAL.AL.Format
