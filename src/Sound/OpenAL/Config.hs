@@ -2,7 +2,7 @@
 --------------------------------------------------------------------------------
 -- |
 -- Module      :  Sound.OpenAL.Config
--- Copyright   :  (c) Sven Panne 2003-2013
+-- Copyright   :  (c) Sven Panne 2003-2015
 -- License     :  BSD3
 -- 
 -- Maintainer  :  Sven Panne <svenpanne@gmail.com>
@@ -31,7 +31,10 @@ module Sound.OpenAL.Config (
    alcProcessContext, alcMakeContextCurrent, alcDestroyContext
 ) where
 
+-- Make the foreign imports happy.
 import Foreign.C.Types
+
+import Control.Monad.IO.Class ( MonadIO(..) )
 import Foreign.Ptr ( Ptr, nullPtr )
 
 --------------------------------------------------------------------------------
@@ -140,9 +143,9 @@ unmarshalDevice device =
 --
 -- /Note:/ Older OpenAL implementations will always report a success!
 
-closeDevice :: Device -> IO Bool
+closeDevice :: MonadIO m => Device -> m Bool
 -- inlined unmarshalALCboolean here to break dependency cycle
-closeDevice = fmap (/= 0) . alcCloseDevice . marshalDevice
+closeDevice = liftIO . fmap (/= 0) . alcCloseDevice . marshalDevice
 
 foreign import ccall unsafe "alcCloseDevice"
    alcCloseDevice :: ALCdevice -> IO ALCboolean

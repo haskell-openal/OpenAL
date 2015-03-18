@@ -2,7 +2,7 @@
 --------------------------------------------------------------------------------
 -- |
 -- Module      :  Sound.OpenAL.ALC.QueryUtils
--- Copyright   :  (c) Sven Panne 2003-2013
+-- Copyright   :  (c) Sven Panne 2003-2015
 -- License     :  BSD3
 -- 
 -- Maintainer  :  Sven Panne <svenpanne@gmail.com>
@@ -17,21 +17,19 @@ module Sound.OpenAL.ALC.QueryUtils (
    alcIsExtensionPresent
 ) where
 
-import Control.Monad ( when )
-import Data.StateVar
+-- Make the foreign imports happy.
 import Foreign.C.Types
+
+import Control.Monad ( when )
+import Data.StateVar ( GettableStateVar, makeGettableStateVar )
 import Foreign.Marshal.Array ( withArray, peekArray )
 import Foreign.Ptr ( Ptr )
-import Sound.OpenAL.ALC.ALCboolean ( unmarshalALCboolean )
-import Sound.OpenAL.ALC.BasicTypes (
-   ALCboolean, ALCchar, ALCint, ALCenum, ALCsizei )
-import Sound.OpenAL.ALC.String ( withALCString, peekALCString )
-import Sound.OpenAL.Config ( Device, ALCdevice(..), nullDevice, marshalDevice )
-import Sound.OpenAL.Constants (
-   alc_DEFAULT_DEVICE_SPECIFIER, alc_DEVICE_SPECIFIER, alc_EXTENSIONS,
-   alc_CAPTURE_DEFAULT_DEVICE_SPECIFIER, alc_CAPTURE_DEVICE_SPECIFIER,
-   alc_ATTRIBUTES_SIZE, alc_ALL_ATTRIBUTES, alc_MAJOR_VERSION,
-   alc_MINOR_VERSION, alc_CAPTURE_SAMPLES )
+
+import Sound.OpenAL.ALC.ALCboolean
+import Sound.OpenAL.ALC.BasicTypes
+import Sound.OpenAL.ALC.String
+import Sound.OpenAL.Config
+import Sound.OpenAL.Constants
 
 --------------------------------------------------------------------------------
 

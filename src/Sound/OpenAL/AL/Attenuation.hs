@@ -2,7 +2,7 @@
 --------------------------------------------------------------------------------
 -- |
 -- Module      :  Sound.OpenAL.AL.Attenuation
--- Copyright   :  (c) Sven Panne 2003-2013
+-- Copyright   :  (c) Sven Panne 2003-2015
 -- License     :  BSD3
 -- 
 -- Maintainer  :  Sven Panne <svenpanne@gmail.com>
@@ -28,10 +28,13 @@ module Sound.OpenAL.AL.Attenuation (
    -- $NoCullingByDistance
 ) where
 
-import Data.StateVar
+-- Make the foreign imports happy.
 import Foreign.C.Types
-import Foreign.Marshal.Alloc
-import Foreign.Ptr
+
+import Data.StateVar ( StateVar, makeStateVar )
+import Foreign.Marshal.Alloc ( alloca )
+import Foreign.Ptr ( Ptr )
+
 import Sound.OpenAL.AL.BasicTypes
 import Sound.OpenAL.AL.PeekPoke
 import Sound.OpenAL.AL.QueryUtils

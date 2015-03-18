@@ -1,7 +1,7 @@
 --------------------------------------------------------------------------------
 -- |
 -- Module      :  Sound.OpenAL.AL.Errors
--- Copyright   :  (c) Sven Panne 2003-2013
+-- Copyright   :  (c) Sven Panne 2003-2015
 -- License     :  BSD3
 -- 
 -- Maintainer  :  Sven Panne <svenpanne@gmail.com>
@@ -17,13 +17,14 @@ module Sound.OpenAL.AL.Errors (
    ALError(..), ALErrorCategory(..), alErrors
 ) where
 
-import Data.StateVar
+-- Make the foreign imports happy.
 import Foreign.C.Types
-import Sound.OpenAL.AL.BasicTypes ( ALenum )
-import Sound.OpenAL.Constants (
-   al_NO_ERROR, al_INVALID_NAME, al_INVALID_ENUM, al_INVALID_VALUE,
-   al_INVALID_OPERATION, al_OUT_OF_MEMORY )
-import Sound.OpenAL.AL.QueryUtils ( StringName(..), getString )
+
+import Data.StateVar ( GettableStateVar, makeGettableStateVar )
+
+import Sound.OpenAL.AL.BasicTypes
+import Sound.OpenAL.Constants
+import Sound.OpenAL.AL.QueryUtils
 
 --------------------------------------------------------------------------------
 

@@ -1,7 +1,7 @@
 --------------------------------------------------------------------------------
 -- |
 -- Module      :  Sound.OpenAL.ALC.Errors
--- Copyright   :  (c) Sven Panne 2003-2013
+-- Copyright   :  (c) Sven Panne 2003-2015
 -- License     :  BSD3
 -- 
 -- Maintainer  :  Sven Panne <svenpanne@gmail.com>
@@ -17,15 +17,16 @@ module Sound.OpenAL.ALC.Errors (
    ALCError(..), ALCErrorCategory(..), alcErrors
 ) where
 
-import Data.StateVar
+-- Make the foreign imports happy.
 import Foreign.C.Types
-import Sound.OpenAL.ALC.BasicTypes ( ALCenum )
-import Sound.OpenAL.ALC.Device ( Device )
-import Sound.OpenAL.ALC.QueryUtils ( StringQuery(..), getString )
-import Sound.OpenAL.Constants (
-   alc_NO_ERROR, alc_INVALID_DEVICE, alc_INVALID_CONTEXT, alc_INVALID_ENUM,
-   alc_INVALID_VALUE, alc_OUT_OF_MEMORY, alc_INVALID_OPERATION )
-import Sound.OpenAL.Config ( ALCdevice(..), marshalDevice )
+
+import Data.StateVar ( GettableStateVar, makeGettableStateVar )
+
+import Sound.OpenAL.ALC.BasicTypes
+import Sound.OpenAL.ALC.Device
+import Sound.OpenAL.ALC.QueryUtils
+import Sound.OpenAL.Constants
+import Sound.OpenAL.Config
 
 --------------------------------------------------------------------------------
 

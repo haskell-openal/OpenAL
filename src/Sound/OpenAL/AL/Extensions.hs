@@ -1,7 +1,7 @@
 --------------------------------------------------------------------------------
 -- |
 -- Module      :  Sound.OpenAL.AL.Extensions
--- Copyright   :  (c) Sven Panne 2003-2013
+-- Copyright   :  (c) Sven Panne 2003-2015
 -- License     :  BSD3
 -- 
 -- Maintainer  :  Sven Panne <svenpanne@gmail.com>
@@ -22,9 +22,12 @@ module Sound.OpenAL.AL.Extensions (
    unmarshalALboolean, unmarshalFormat, unmarshalBuffer
 ) where
 
-import Data.StateVar
+-- Make the foreign imports happy.
 import Foreign.C.Types
+
+import Data.StateVar ( GettableStateVar, makeGettableStateVar )
 import Foreign.Ptr
+
 import Sound.OpenAL.AL.ALboolean
 import Sound.OpenAL.AL.BasicTypes
 import Sound.OpenAL.AL.BufferInternal

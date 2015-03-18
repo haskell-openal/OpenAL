@@ -2,7 +2,7 @@
 --------------------------------------------------------------------------------
 -- |
 -- Module      :  Sound.OpenAL.ALC.ALCboolean
--- Copyright   :  (c) Sven Panne 2003-2013
+-- Copyright   :  (c) Sven Panne 2003-2015
 -- License     :  BSD3
 -- 
 -- Maintainer  :  Sven Panne <svenpanne@gmail.com>
@@ -17,8 +17,8 @@ module Sound.OpenAL.ALC.ALCboolean (
    marshalALCboolean, unmarshalALCboolean
 ) where
 
-import Sound.OpenAL.ALC.BasicTypes ( ALCboolean )
-import Sound.OpenAL.Constants ( alc_FALSE, alc_TRUE )
+import Sound.OpenAL.ALC.BasicTypes
+import Sound.OpenAL.Constants
 
 --------------------------------------------------------------------------------
 

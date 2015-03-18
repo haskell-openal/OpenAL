@@ -2,7 +2,7 @@
 --------------------------------------------------------------------------------
 -- |
 -- Module      :  Sound.OpenAL.AL.SourceState
--- Copyright   :  (c) Sven Panne 2003-2013
+-- Copyright   :  (c) Sven Panne 2003-2015
 -- License     :  BSD3
 -- 
 -- Maintainer  :  Sven Panne <svenpanne@gmail.com>
@@ -15,8 +15,8 @@ module Sound.OpenAL.AL.SourceState (
    SourceState(..), unmarshalSourceState
 ) where
 
-import Sound.OpenAL.AL.BasicTypes ( ALint )
-import Sound.OpenAL.Constants ( al_INITIAL, al_PLAYING, al_PAUSED, al_STOPPED )
+import Sound.OpenAL.AL.BasicTypes
+import Sound.OpenAL.Constants
 
 --------------------------------------------------------------------------------
 

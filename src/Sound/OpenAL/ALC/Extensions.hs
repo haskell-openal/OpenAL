@@ -1,7 +1,7 @@
 --------------------------------------------------------------------------------
 -- |
 -- Module      :  Sound.OpenAL.ALC.Extensions
--- Copyright   :  (c) Sven Panne 2003-2013
+-- Copyright   :  (c) Sven Panne 2003-2015
 -- License     :  BSD3
 -- 
 -- Maintainer  :  Sven Panne <svenpanne@gmail.com>
@@ -18,16 +18,18 @@ module Sound.OpenAL.ALC.Extensions (
    alcVersion
 ) where
 
-import Control.Monad ( liftM2 )
-import Data.StateVar
+-- Make the foreign imports happy.
 import Foreign.C.Types
+
+import Control.Monad ( liftM2 )
+import Data.StateVar ( GettableStateVar, makeGettableStateVar )
 import Foreign.Ptr ( Ptr, FunPtr )
-import Sound.OpenAL.ALC.BasicTypes ( ALCchar, ALCenum, ALCint )
-import Sound.OpenAL.ALC.Device ( Device )
-import Sound.OpenAL.ALC.QueryUtils (
-   StringQuery(..), getString, IntQuery(..), getInteger, alcIsExtensionPresent )
-import Sound.OpenAL.ALC.String ( withALCString )
-import Sound.OpenAL.Config ( ALCdevice(..), nullDevice, marshalDevice )
+
+import Sound.OpenAL.ALC.BasicTypes
+import Sound.OpenAL.ALC.Device
+import Sound.OpenAL.ALC.QueryUtils
+import Sound.OpenAL.ALC.String
+import Sound.OpenAL.Config
 
 --------------------------------------------------------------------------------
 

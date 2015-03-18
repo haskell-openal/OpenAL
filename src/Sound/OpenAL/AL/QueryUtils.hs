@@ -2,7 +2,7 @@
 --------------------------------------------------------------------------------
 -- |
 -- Module      :  Sound.OpenAL.AL.QueryUtils
--- Copyright   :  (c) Sven Panne 2003-2013
+-- Copyright   :  (c) Sven Panne 2003-2015
 -- License     :  BSD3
 -- 
 -- Maintainer  :  Sven Panne <svenpanne@gmail.com>
@@ -18,18 +18,14 @@ module Sound.OpenAL.AL.QueryUtils (
    StringName(..), getString
 ) where
 
+-- Make the foreign imports happy.
 import Foreign.C.Types
+
 import Foreign.Ptr ( Ptr )
-import Sound.OpenAL.AL.BasicTypes ( ALchar, ALenum )
-import Sound.OpenAL.AL.String ( peekALString )
-import Sound.OpenAL.Constants (
-   al_DISTANCE_MODEL, al_DOPPLER_FACTOR, al_SPEED_OF_SOUND, al_POSITION,
-   al_VELOCITY, al_GAIN, al_ORIENTATION, al_SOURCE_RELATIVE, al_SOURCE_TYPE,
-   al_LOOPING, al_BUFFER, al_BUFFERS_QUEUED, al_BUFFERS_PROCESSED, al_MIN_GAIN,
-   al_MAX_GAIN, al_REFERENCE_DISTANCE, al_ROLLOFF_FACTOR, al_MAX_DISTANCE,
-   al_PITCH, al_DIRECTION, al_CONE_INNER_ANGLE, al_CONE_OUTER_ANGLE,
-   al_CONE_OUTER_GAIN, al_SEC_OFFSET, al_SAMPLE_OFFSET, al_BYTE_OFFSET,
-   al_SOURCE_STATE, al_VENDOR, al_RENDERER, al_VERSION, al_EXTENSIONS )
+
+import Sound.OpenAL.AL.BasicTypes
+import Sound.OpenAL.AL.String
+import Sound.OpenAL.Constants
 
 --------------------------------------------------------------------------------
 

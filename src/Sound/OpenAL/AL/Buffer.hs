@@ -2,7 +2,7 @@
 --------------------------------------------------------------------------------
 -- |
 -- Module      :  Sound.OpenAL.AL.Buffer
--- Copyright   :  (c) Sven Panne 2003-2013
+-- Copyright   :  (c) Sven Panne 2003-2015
 -- License     :  BSD3
 -- 
 -- Maintainer  :  Sven Panne <svenpanne@gmail.com>
@@ -69,15 +69,18 @@ module Sound.OpenAL.AL.Buffer (
    Buffer, MemoryRegion(..), Format(..), BufferData(..), bufferData
 ) where
 
-import Data.StateVar
+-- Make the foreign imports happy.
 import Foreign.C.Types
-import Foreign.Marshal.Alloc
-import Foreign.Ptr
+
+import Data.StateVar ( StateVar, makeStateVar )
+import Foreign.Marshal.Alloc ( alloca )
+import Foreign.Ptr ( Ptr, nullPtr )
+
 import Sound.OpenAL.AL.BasicTypes
 import Sound.OpenAL.AL.BufferInternal
 import Sound.OpenAL.AL.Format
 import Sound.OpenAL.AL.PeekPoke
-import Sound.OpenAL.ALC.Context ( Frequency )
+import qualified Sound.OpenAL.ALC.Context as ALC
 import Sound.OpenAL.Constants
 
 -- For Haddock only.
@@ -89,7 +92,7 @@ import Sound.OpenAL.AL.SourceState
 data MemoryRegion a = MemoryRegion (Ptr a) ALsizei
    deriving ( Eq, Ord, Show )
 
-data BufferData a = BufferData (MemoryRegion a) Format Frequency
+data BufferData a = BufferData (MemoryRegion a) Format ALC.Frequency
    deriving ( Eq, Ord, Show )
 
 --------------------------------------------------------------------------------

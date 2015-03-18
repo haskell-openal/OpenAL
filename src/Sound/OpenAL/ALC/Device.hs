@@ -1,7 +1,7 @@
 --------------------------------------------------------------------------------
 -- |
 -- Module      :  Sound.OpenAL.ALC.Device
--- Copyright   :  (c) Sven Panne 2003-2013
+-- Copyright   :  (c) Sven Panne 2003-2015
 -- License     :  BSD3
 -- 
 -- Maintainer  :  Sven Panne <svenpanne@gmail.com>
@@ -26,15 +26,15 @@ module Sound.OpenAL.ALC.Device (
    defaultDeviceSpecifier, deviceSpecifier, allDeviceSpecifiers
 ) where
 
-import Data.StateVar
+import Control.Monad.IO.Class ( MonadIO(..) )
+import Data.StateVar ( get, GettableStateVar, makeGettableStateVar )
 import Foreign.Ptr ( Ptr, nullPtr )
 import Foreign.Marshal.Utils ( maybePeek )
-import Sound.OpenAL.ALC.BasicTypes ( ALCchar )
-import Sound.OpenAL.ALC.QueryUtils (
-   StringQuery(..), getString, getStringRaw, alcIsExtensionPresent )
-import Sound.OpenAL.ALC.String ( withALCString, peekALCString, peekALCStrings )
-import Sound.OpenAL.Config (
-   Device, ALCdevice(..), unmarshalDevice, closeDevice )
+
+import Sound.OpenAL.ALC.BasicTypes
+import Sound.OpenAL.ALC.QueryUtils
+import Sound.OpenAL.ALC.String
+import Sound.OpenAL.Config
 
 --------------------------------------------------------------------------------
 
@@ -183,9 +183,9 @@ import Sound.OpenAL.Config (
 -- and could be inaccurate. Any corrections and\/or additions are highly
 -- welcome.
 
-openDevice :: Maybe String -> IO (Maybe Device)
+openDevice :: MonadIO m => Maybe String -> m (Maybe Device)
 openDevice maybeDeviceSpec =
-   fmap unmarshalDevice $
+   liftIO $ fmap unmarshalDevice $
       maybe (alcOpenDevice nullPtr)   -- use preferred device
             (flip withALCString alcOpenDevice)
             maybeDeviceSpec

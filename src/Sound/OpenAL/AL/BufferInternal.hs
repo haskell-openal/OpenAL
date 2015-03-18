@@ -2,7 +2,7 @@
 --------------------------------------------------------------------------------
 -- |
 -- Module      :  Sound.OpenAL.AL.BufferInternal
--- Copyright   :  (c) Sven Panne 2003-2013
+-- Copyright   :  (c) Sven Panne 2003-2015
 -- License     :  BSD3
 -- 
 -- Maintainer  :  Sven Panne <svenpanne@gmail.com>
@@ -17,15 +17,18 @@ module Sound.OpenAL.AL.BufferInternal (
    Buffer(..), marshalBuffer, unmarshalBuffer
 ) where
 
-import Control.Monad.IO.Class ( MonadIO(..) )
-import Data.ObjectName
-import Foreign.Marshal.Array ( withArrayLen, peekArray, allocaArray )
+-- Make the foreign imports happy.
 import Foreign.C.Types
+
+import Control.Monad.IO.Class ( MonadIO(..) )
+import Data.ObjectName ( ObjectName(..), GeneratableObjectName(..) )
+import Foreign.Marshal.Array ( withArrayLen, peekArray, allocaArray )
 import Foreign.Ptr ( Ptr, castPtr )
 import Foreign.Storable ( Storable(..) )
-import Sound.OpenAL.AL.ALboolean ( unmarshalALboolean )
-import Sound.OpenAL.AL.BasicTypes ( ALboolean, ALuint, ALsizei )
-import Sound.OpenAL.AL.PeekPoke ( peek1, poke1 )
+
+import Sound.OpenAL.AL.ALboolean
+import Sound.OpenAL.AL.BasicTypes
+import Sound.OpenAL.AL.PeekPoke
 
 --------------------------------------------------------------------------------
 

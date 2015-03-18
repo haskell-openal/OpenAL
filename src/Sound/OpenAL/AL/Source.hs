@@ -2,7 +2,7 @@
 --------------------------------------------------------------------------------
 -- |
 -- Module      :  Sound.OpenAL.AL.Source
--- Copyright   :  (c) Sven Panne 2003-2013
+-- Copyright   :  (c) Sven Panne 2003-2015
 -- License     :  BSD3
 -- 
 -- Maintainer  :  Sven Panne <svenpanne@gmail.com>
@@ -76,16 +76,21 @@ module Sound.OpenAL.AL.Source (
    SourceState(..), sourceState, play, pause, stop, rewind
 ) where
 
-import Control.Monad.IO.Class ( MonadIO(..) )
-import Control.Monad
-import Data.StateVar
-import Data.ObjectName
+-- Make the foreign imports happy.
 import Foreign.C.Types
-import Foreign.Marshal.Array
-import Foreign.Marshal.Utils
-import Foreign.Ptr
-import Foreign.Storable
-import Graphics.Rendering.OpenGL.GL.Tensor
+
+import Control.Monad ( liftM2 )
+import Control.Monad.IO.Class ( MonadIO(..) )
+import Data.ObjectName ( ObjectName(..), GeneratableObjectName(..) )
+import Data.StateVar ( get, ($=)
+                     , GettableStateVar, makeGettableStateVar
+                     , StateVar, makeStateVar )
+import Foreign.Marshal.Array ( allocaArray, peekArray, withArrayLen )
+import Foreign.Marshal.Utils ( with )
+import Foreign.Ptr ( Ptr, castPtr )
+import Foreign.Storable ( Storable(..) )
+import Graphics.Rendering.OpenGL.GL.Tensor ( Vector3(..), Vertex3(..) )
+
 import Sound.OpenAL.AL.ALboolean
 import Sound.OpenAL.AL.BasicTypes
 import Sound.OpenAL.AL.BufferInternal
@@ -653,11 +658,11 @@ foreign import ccall unsafe "alSourcei"
 -- queue will remain unchanged (even if some of the buffers could have been
 -- queued).
 
-queueBuffers :: Source -> [Buffer] -> IO ()
+queueBuffers :: MonadIO m => Source -> [Buffer] -> m ()
 queueBuffers = withArraySizei . alSourceQueueBuffers
 
-withArraySizei :: Storable a => (ALsizei -> Ptr a -> IO ()) -> [a] -> IO ()
-withArraySizei f xs = withArrayLen xs $ f . fromIntegral
+withArraySizei :: (MonadIO m, Storable a) => (ALsizei -> Ptr a -> IO ()) -> [a] -> m ()
+withArraySizei f xs = liftIO $ withArrayLen xs $ f . fromIntegral
 
 foreign import ccall unsafe "alSourceQueueBuffers"
    alSourceQueueBuffers :: Source -> ALsizei -> Ptr Buffer -> IO ()
@@ -678,8 +683,8 @@ foreign import ccall unsafe "alSourceQueueBuffers"
 -- The operation will fail with an 'ALInvalidValue' error if more buffers are
 -- requested than available, leaving the destination arguments unchanged.
 
-unqueueBuffers :: Source -> ALsizei -> IO [Buffer]
-unqueueBuffers src n = allocaArray (fromIntegral n) $ \p -> do
+unqueueBuffers :: MonadIO m => Source -> ALsizei -> m [Buffer]
+unqueueBuffers src n = liftIO $ allocaArray (fromIntegral n) $ \p -> do
     alSourceUnqueueBuffers src n p
     peekArray (fromIntegral n) p
 
@@ -723,7 +728,7 @@ sourceState source =
 -- 'Stopped' source will propagate it to 'Initial' then to 'Playing'
 -- immediately.
 
-play :: [Source] -> IO ()
+play :: MonadIO m => [Source] -> m ()
 play = withArraySizei alSourcePlayv
 
 foreign import ccall unsafe "alSourcePlayv"
@@ -734,7 +739,7 @@ foreign import ccall unsafe "alSourcePlayv"
 -- processing, its current state is preserved. 'pause' applied to a 'Paused'
 -- source is a legal NOP. 'pause' applied to a 'Stopped' source is a legal NOP.
 
-pause :: [Source] -> IO ()
+pause :: MonadIO m => [Source] -> m ()
 pause = withArraySizei alSourcePausev
 
 foreign import ccall unsafe "alSourcePausev"
@@ -746,7 +751,7 @@ foreign import ccall unsafe "alSourcePausev"
 -- source will change its state to 'Stopped', with the same consequences as on a
 -- 'Playing' source. 'stop' applied to a 'Stopped' source is a legal NOP.
 
-stop :: [Source] -> IO ()
+stop :: MonadIO m => [Source] -> m ()
 stop = withArraySizei alSourceStopv
 
 foreign import ccall unsafe "alSourceStopv"
@@ -761,7 +766,7 @@ foreign import ccall unsafe "alSourceStopv"
 -- source promotes the source to 'Initial', resetting the sampling offset to the
 -- beginning.
 
-rewind :: [Source] -> IO ()
+rewind :: MonadIO m => [Source] -> m ()
 rewind = withArraySizei alSourceRewindv
 
 foreign import ccall unsafe "alSourceRewindv"

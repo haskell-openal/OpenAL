@@ -2,7 +2,7 @@
 --------------------------------------------------------------------------------
 -- |
 -- Module      :  Sound.OpenAL.AL.Format
--- Copyright   :  (c) Sven Panne 2003-2013
+-- Copyright   :  (c) Sven Panne 2003-2015
 -- License     :  BSD3
 -- 
 -- Maintainer  :  Sven Panne <svenpanne@gmail.com>
@@ -17,9 +17,8 @@ module Sound.OpenAL.AL.Format (
    Format(..), marshalFormat, unmarshalFormat
 ) where
 
-import Sound.OpenAL.AL.BasicTypes ( ALenum )
-import Sound.OpenAL.Constants (
-   al_FORMAT_MONO8, al_FORMAT_MONO16, al_FORMAT_STEREO8, al_FORMAT_STEREO16 )
+import Sound.OpenAL.AL.BasicTypes
+import Sound.OpenAL.Constants
 
 --------------------------------------------------------------------------------
 

@@ -1,7 +1,7 @@
 --------------------------------------------------------------------------------
 -- |
 -- Module      :  Sound.OpenAL.AL.StringQueries
--- Copyright   :  (c) Sven Panne 2003-2013
+-- Copyright   :  (c) Sven Panne 2003-2015
 -- License     :  BSD3
 -- 
 -- Maintainer  :  Sven Panne <svenpanne@gmail.com>
@@ -17,8 +17,9 @@ module Sound.OpenAL.AL.StringQueries (
    alVendor, alRenderer
 ) where
 
-import Data.StateVar
-import Sound.OpenAL.AL.QueryUtils ( StringName(..), getString )
+import Data.StateVar ( GettableStateVar, makeGettableStateVar )
+
+import Sound.OpenAL.AL.QueryUtils
 
 --------------------------------------------------------------------------------
 

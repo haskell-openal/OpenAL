@@ -1,7 +1,7 @@
 --------------------------------------------------------------------------------
 -- |
 -- Module      :  Sound.OpenAL.ALC.Capture
--- Copyright   :  (c) Sven Panne 2003-2013
+-- Copyright   :  (c) Sven Panne 2003-2015
 -- License     :  BSD3
 -- 
 -- Maintainer  :  Sven Panne <svenpanne@gmail.com>
@@ -20,22 +20,23 @@ module Sound.OpenAL.ALC.Capture (
    allCaptureDeviceSpecifiers
 ) where
 
-import Data.StateVar
+-- Make the foreign imports happy.
 import Foreign.C.Types
+
+import Control.Monad.IO.Class ( MonadIO(..) )
+import Data.StateVar ( get, GettableStateVar, makeGettableStateVar )
 import Foreign.Ptr ( Ptr, nullPtr, FunPtr )
-import Sound.OpenAL.AL.Buffer ( Format )
-import Sound.OpenAL.AL.Format ( marshalFormat )
-import Sound.OpenAL.ALC.ALCboolean ( unmarshalALCboolean )
-import Sound.OpenAL.ALC.BasicTypes (
-   ALCchar, ALCuint, ALCenum, ALCsizei, ALCboolean )
-import Sound.OpenAL.ALC.Context ( Frequency )
-import Sound.OpenAL.ALC.Device ( Device )
-import Sound.OpenAL.ALC.Extensions ( alcProcAddress )
-import Sound.OpenAL.ALC.QueryUtils ( IntQuery(..), getInteger )
-import Sound.OpenAL.ALC.QueryUtils (
-   StringQuery(..), getString, getStringRaw, alcIsExtensionPresent )
-import Sound.OpenAL.ALC.String ( withALCString, peekALCStrings )
-import Sound.OpenAL.Config ( ALCdevice(..), marshalDevice, unmarshalDevice )
+
+import Sound.OpenAL.AL.Buffer
+import Sound.OpenAL.AL.Format
+import Sound.OpenAL.ALC.ALCboolean
+import Sound.OpenAL.ALC.BasicTypes
+import Sound.OpenAL.ALC.Context
+import Sound.OpenAL.ALC.Device
+import Sound.OpenAL.ALC.Extensions
+import Sound.OpenAL.ALC.QueryUtils
+import Sound.OpenAL.ALC.String
+import Sound.OpenAL.Config
 
 --------------------------------------------------------------------------------
 
@@ -50,9 +51,9 @@ getCaptureFunc = get . alcProcAddress Nothing
 
 --------------------------------------------------------------------------------
 
-captureOpenDevice ::
-   Maybe String -> Frequency -> Format -> NumSamples -> IO (Maybe Device)
-captureOpenDevice maybeDeviceSpec frequency format size = do
+captureOpenDevice :: MonadIO m =>
+   Maybe String -> Frequency -> Format -> NumSamples -> m (Maybe Device)
+captureOpenDevice maybeDeviceSpec frequency format size = liftIO $ do
    funPtr <- getCaptureFunc "alcCaptureOpenDevice"
    let open deviceSpec =
           invokeCaptureOpenDevice funPtr deviceSpec (round frequency)
@@ -67,11 +68,11 @@ foreign import ccall unsafe "dynamic"
 
 --------------------------------------------------------------------------------
 
-captureStart :: Device -> IO ()
+captureStart :: MonadIO m => Device -> m ()
 captureStart = captureStartStop "alcCaptureStart"
 
-captureStartStop :: String -> Device -> IO ()
-captureStartStop funName device = do
+captureStartStop :: MonadIO m => String -> Device -> m ()
+captureStartStop funName device = liftIO $ do
    funPtr <- getCaptureFunc funName
    invokeCaptureStartStop funPtr (marshalDevice device)
 
@@ -86,8 +87,8 @@ captureNumSamples device = makeGettableStateVar $
 
 --------------------------------------------------------------------------------
 
-captureSamples :: Device -> Ptr a -> NumSamples -> IO ()
-captureSamples device buf n = do
+captureSamples :: MonadIO m => Device -> Ptr a -> NumSamples -> m ()
+captureSamples device buf n = liftIO $ do
    funPtr <- getCaptureFunc "alcCaptureSamples"
    invokeCaptureSamples funPtr (marshalDevice device) buf n
 
@@ -96,13 +97,13 @@ foreign import ccall unsafe "dynamic"
 
 --------------------------------------------------------------------------------
 
-captureStop :: Device -> IO ()
+captureStop :: MonadIO m => Device -> m ()
 captureStop = captureStartStop "alcCaptureStop"
 
 --------------------------------------------------------------------------------
 
-captureCloseDevice :: Device -> IO Bool
-captureCloseDevice device = do
+captureCloseDevice :: MonadIO m => Device -> m Bool
+captureCloseDevice device = liftIO $ do
    funPtr <- getCaptureFunc "alcCaptureCloseDevice"
    fmap unmarshalALCboolean .
       invokeCaptureCloseDevice funPtr . marshalDevice $ device

@@ -16,6 +16,7 @@ description:
   This package has also been tested on GNU/Linux and iOS.
 homepage: https://github.com/haskell-openal/ALUT
 bug-reports: https://github.com/haskell-openal/ALUT/issues
+copyright: Copyright (C) 2003-2015 Sven Panne
 license: BSD3
 license-file: LICENSE
 author: Sven Panne

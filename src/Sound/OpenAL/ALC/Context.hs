@@ -2,7 +2,7 @@
 --------------------------------------------------------------------------------
 -- |
 -- Module      :  Sound.OpenAL.ALC.Context
--- Copyright   :  (c) Sven Panne 2003-2013
+-- Copyright   :  (c) Sven Panne 2003-2015
 -- License     :  BSD3
 -- 
 -- Maintainer  :  Sven Panne <svenpanne@gmail.com>
@@ -27,9 +27,12 @@ module Sound.OpenAL.ALC.Context (
    processContext, suspendContext, destroyContext, contextsDevice, allAttributes
 ) where
 
-import Data.StateVar
-import Foreign.Marshal.Array
-import Foreign.Ptr
+import Control.Monad.IO.Class ( MonadIO(..) )
+import Data.StateVar ( GettableStateVar, makeGettableStateVar
+                     , StateVar, makeStateVar )
+import Foreign.Marshal.Array ( withArray0 )
+import Foreign.Ptr ( Ptr )
+
 import Sound.OpenAL.ALC.ALCboolean
 import Sound.OpenAL.ALC.BasicTypes
 import Sound.OpenAL.ALC.Device
@@ -93,8 +96,8 @@ unmarshalContextAttribute a@(x,y)
 -- 'Just' the new context. Note that 'createContext' does /not/ set the current
 -- context, this must be done separately via 'currentContext'.
 
-createContext :: Device -> [ContextAttribute] -> IO (Maybe Context)
-createContext device attributes = do
+createContext :: MonadIO m => Device -> [ContextAttribute] -> m (Maybe Context)
+createContext device attributes = liftIO $ do
    let pairToList (key, value) = [key, value]
        attrs = concatMap (pairToList . marshalContextAttribute) attributes
    fmap unmarshalContext .
@@ -137,8 +140,8 @@ makeContextCurrent =
 -- affect a context that is already marked as processing. The default state of a
 -- context created by 'createContext' is that it is processing.
 
-processContext :: Context -> IO ()
-processContext = fmap (const ()) . alcProcessContext . marshalContext
+processContext :: MonadIO m => Context -> m ()
+processContext = liftIO . fmap (const ()) . alcProcessContext . marshalContext
 
 -- | The application can suspend any context from processing (including the
 -- current one). To indicate that a context should be suspended from processing
@@ -147,8 +150,8 @@ processContext = fmap (const ()) . alcProcessContext . marshalContext
 -- 'suspendContext' are legal, and do not affect a context that is already
 -- marked as suspended.
 
-suspendContext :: Context -> IO ()
-suspendContext = alcSuspendContext . marshalContext
+suspendContext :: MonadIO m => Context -> m ()
+suspendContext = liftIO . alcSuspendContext . marshalContext
 
 foreign import ccall unsafe "alcSuspendContext"
    alcSuspendContext :: ALCcontext -> IO ()
@@ -160,8 +163,8 @@ foreign import ccall unsafe "alcSuspendContext"
 -- 'Nothing'. Applications should not attempt to destroy a current context,
 -- doing so will not work and will result in an 'ALCInvalidOperation' error.
 
-destroyContext :: Context -> IO ()
-destroyContext = fmap (const ()) . alcDestroyContext . marshalContext
+destroyContext :: MonadIO m => Context -> m ()
+destroyContext = liftIO . fmap (const ()) . alcDestroyContext . marshalContext
 
 --------------------------------------------------------------------------------
 

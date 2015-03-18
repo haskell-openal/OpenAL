@@ -2,7 +2,7 @@
 --------------------------------------------------------------------------------
 -- |
 -- Module      :  Sound.OpenAL.ALC.String
--- Copyright   :  (c) Sven Panne 2003-2013
+-- Copyright   :  (c) Sven Panne 2003-2015
 -- License     :  BSD3
 -- 
 -- Maintainer  :  Sven Panne <svenpanne@gmail.com>
@@ -18,7 +18,8 @@ module Sound.OpenAL.ALC.String (
 import Foreign.C.String ( withCString, peekCString )
 import Foreign.Marshal.Array ( lengthArray0 )
 import Foreign.Ptr ( Ptr, castPtr, plusPtr )
-import Sound.OpenAL.ALC.BasicTypes ( ALCchar )
+
+import Sound.OpenAL.ALC.BasicTypes
 
 --------------------------------------------------------------------------------
 

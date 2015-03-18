@@ -2,7 +2,7 @@
 --------------------------------------------------------------------------------
 -- |
 -- Module      :  Sound.OpenAL.AL.Doppler
--- Copyright   :  (c) Sven Panne 2003-2013
+-- Copyright   :  (c) Sven Panne 2003-2015
 -- License     :  BSD3
 -- 
 -- Maintainer  :  Sven Panne <svenpanne@gmail.com>
@@ -20,9 +20,12 @@ module Sound.OpenAL.AL.Doppler (
    dopplerFactor, speedOfSound
 ) where
 
-import Data.StateVar
+-- Make the foreign imports happy.
 import Foreign.C.Types
-import Foreign.Ptr
+
+import Data.StateVar ( get, StateVar, makeStateVar )
+import Foreign.Ptr ( FunPtr )
+
 import Sound.OpenAL.AL.BasicTypes
 import Sound.OpenAL.AL.Extensions
 import Sound.OpenAL.AL.QueryUtils
