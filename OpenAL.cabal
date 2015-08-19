@@ -1,5 +1,5 @@
 name: OpenAL
-version: 1.7.0.0
+version: 1.7.0.1
 synopsis: A binding to the OpenAL cross-platform 3D audio API
 description:
   A Haskell binding for the OpenAL cross-platform 3D audio API,
@@ -72,7 +72,7 @@ library
     transformers >= 0.2  && < 0.5,
     ObjectName   >= 1.1  && < 1.2,
     StateVar     >= 1.1  && < 1.2,
-    OpenGL       >= 2.12 && < 2.13
+    OpenGL       >= 2.12 && < 2.14
   default-language: Haskell2010
   ghc-options: -Wall
   if os(windows) && flag(UseNativeWindowsLibraries)
