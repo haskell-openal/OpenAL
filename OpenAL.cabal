@@ -1,5 +1,5 @@
 name: OpenAL
-version: 1.7.0.1
+version: 1.7.0.2
 synopsis: A binding to the OpenAL cross-platform 3D audio API
 description:
   A Haskell binding for the OpenAL cross-platform 3D audio API,
@@ -25,6 +25,7 @@ category: Sound
 build-type: Simple
 cabal-version:  >= 1.10
 extra-source-files:
+  CHANGELOG.md
   README.md
   examples/test/TestDevice.hs
 
