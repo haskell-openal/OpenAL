@@ -70,7 +70,7 @@ library
   hs-source-dirs: src
   build-depends:
     base         >= 3    && < 5,
-    transformers >= 0.2  && < 0.5,
+    transformers >= 0.2  && < 0.6,
     ObjectName   >= 1.1  && < 1.2,
     StateVar     >= 1.1  && < 1.2,
     OpenGL       >= 2.12 && < 2.14
