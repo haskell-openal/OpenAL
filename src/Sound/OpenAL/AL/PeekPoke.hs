@@ -2,7 +2,7 @@
 --------------------------------------------------------------------------------
 -- |
 -- Module      :  Sound.OpenAL.AL.PeekPoke
--- Copyright   :  (c) Sven Panne 2003-2015
+-- Copyright   :  (c) Sven Panne 2003-2016
 -- License     :  BSD3
 -- 
 -- Maintainer  :  Sven Panne <svenpanne@gmail.com>
