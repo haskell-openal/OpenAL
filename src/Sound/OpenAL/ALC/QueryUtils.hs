@@ -17,8 +17,10 @@ module Sound.OpenAL.ALC.QueryUtils (
    alcIsExtensionPresent
 ) where
 
+#if __GLASGOW_HASKELL__ >= 704
 -- Make the foreign imports happy.
 import Foreign.C.Types
+#endif
 
 import Control.Monad ( when )
 import Data.StateVar ( GettableStateVar, makeGettableStateVar )
