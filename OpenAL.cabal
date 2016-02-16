@@ -90,6 +90,7 @@ library
   ghc-options: -Wall
   if impl(ghc > 8)
     ghc-options: -Wcompat
+  other-extensions: CPP
   if os(windows) && flag(UseNativeWindowsLibraries)
     extra-libraries: OpenAL32
   else
