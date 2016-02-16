@@ -1,3 +1,4 @@
+{-# LANGUAGE CPP #-}
 {-# OPTIONS_HADDOCK hide #-}
 --------------------------------------------------------------------------------
 -- |
@@ -17,8 +18,10 @@ module Sound.OpenAL.AL.BufferInternal (
    Buffer(..), marshalBuffer, unmarshalBuffer
 ) where
 
+#if __GLASGOW_HASKELL__ >= 704
 -- Make the foreign imports happy.
 import Foreign.C.Types
+#endif
 
 import Control.Monad.IO.Class ( MonadIO(..) )
 import Data.ObjectName ( ObjectName(..), GeneratableObjectName(..) )

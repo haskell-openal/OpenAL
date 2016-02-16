@@ -1,3 +1,4 @@
+{-# LANGUAGE CPP #-}
 --------------------------------------------------------------------------------
 -- |
 -- Module      :  Sound.OpenAL.ALC.Extensions
@@ -18,8 +19,10 @@ module Sound.OpenAL.ALC.Extensions (
    alcVersion
 ) where
 
+#if __GLASGOW_HASKELL__ >= 704
 -- Make the foreign imports happy.
 import Foreign.C.Types
+#endif
 
 import Control.Monad ( liftM2 )
 import Data.StateVar ( GettableStateVar, makeGettableStateVar )

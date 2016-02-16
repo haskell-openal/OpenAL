@@ -1,3 +1,4 @@
+{-# LANGUAGE CPP #-}
 --------------------------------------------------------------------------------
 -- |
 -- Module      :  Sound.OpenAL.AL.Extensions
@@ -22,8 +23,10 @@ module Sound.OpenAL.AL.Extensions (
    unmarshalALboolean, unmarshalFormat, unmarshalBuffer
 ) where
 
+#if __GLASGOW_HASKELL__ >= 704
 -- Make the foreign imports happy.
 import Foreign.C.Types
+#endif
 
 import Data.StateVar ( GettableStateVar, makeGettableStateVar )
 import Foreign.Ptr

@@ -1,3 +1,4 @@
+{-# LANGUAGE CPP #-}
 --------------------------------------------------------------------------------
 -- |
 -- Module      :  Sound.OpenAL.AL.Listener
@@ -31,8 +32,10 @@ module Sound.OpenAL.AL.Listener (
    listenerPosition, listenerVelocity, Gain, listenerGain, orientation
 ) where
 
+#if __GLASGOW_HASKELL__ >= 704
 -- Make the foreign imports happy.
 import Foreign.C.Types
+#endif
 
 import Data.StateVar ( StateVar, makeStateVar )
 import Foreign.Marshal.Array ( allocaArray, withArray )

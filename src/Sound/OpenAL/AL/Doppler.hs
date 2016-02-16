@@ -1,3 +1,4 @@
+{-# LANGUAGE CPP #-}
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 --------------------------------------------------------------------------------
 -- |
@@ -20,8 +21,10 @@ module Sound.OpenAL.AL.Doppler (
    dopplerFactor, speedOfSound
 ) where
 
+#if __GLASGOW_HASKELL__ >= 704
 -- Make the foreign imports happy.
 import Foreign.C.Types
+#endif
 
 import Data.StateVar ( get, StateVar, makeStateVar )
 import Foreign.Ptr ( FunPtr )

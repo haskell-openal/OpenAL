@@ -1,3 +1,4 @@
+{-# LANGUAGE CPP #-}
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 --------------------------------------------------------------------------------
 -- |
@@ -76,8 +77,10 @@ module Sound.OpenAL.AL.Source (
    SourceState(..), sourceState, play, pause, stop, rewind
 ) where
 
+#if __GLASGOW_HASKELL__ >= 704
 -- Make the foreign imports happy.
 import Foreign.C.Types
+#endif
 
 import Control.Monad ( liftM2 )
 import Control.Monad.IO.Class ( MonadIO(..) )

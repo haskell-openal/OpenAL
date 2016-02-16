@@ -1,3 +1,4 @@
+{-# LANGUAGE CPP #-}
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 --------------------------------------------------------------------------------
 -- |
@@ -69,8 +70,10 @@ module Sound.OpenAL.AL.Buffer (
    Buffer, MemoryRegion(..), Format(..), BufferData(..), bufferData
 ) where
 
+#if __GLASGOW_HASKELL__ >= 704
 -- Make the foreign imports happy.
 import Foreign.C.Types
+#endif
 
 import Data.StateVar ( StateVar, makeStateVar )
 import Foreign.Marshal.Alloc ( alloca )

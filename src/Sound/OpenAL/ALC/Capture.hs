@@ -1,3 +1,4 @@
+{-# LANGUAGE CPP #-}
 --------------------------------------------------------------------------------
 -- |
 -- Module      :  Sound.OpenAL.ALC.Capture
@@ -20,8 +21,10 @@ module Sound.OpenAL.ALC.Capture (
    allCaptureDeviceSpecifiers
 ) where
 
+#if __GLASGOW_HASKELL__ >= 704
 -- Make the foreign imports happy.
 import Foreign.C.Types
+#endif
 
 import Control.Monad.IO.Class ( MonadIO(..) )
 import Data.StateVar ( get, GettableStateVar, makeGettableStateVar )

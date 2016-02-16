@@ -1,3 +1,4 @@
+{-# LANGUAGE CPP #-}
 --------------------------------------------------------------------------------
 -- |
 -- Module      :  Sound.OpenAL.ALC.Errors
@@ -17,8 +18,10 @@ module Sound.OpenAL.ALC.Errors (
    ALCError(..), ALCErrorCategory(..), alcErrors
 ) where
 
+#if __GLASGOW_HASKELL__ >= 704
 -- Make the foreign imports happy.
 import Foreign.C.Types
+#endif
 
 import Data.StateVar ( GettableStateVar, makeGettableStateVar )
 
