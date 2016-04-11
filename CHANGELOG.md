@@ -1,3 +1,7 @@
+1.7.0.4
+-------
+* Removed redundant constraints.
+
 1.7.0.3
 -------
 * Relaxed upper version bound for `OpenGL` package.

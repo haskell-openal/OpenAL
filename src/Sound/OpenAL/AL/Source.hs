@@ -595,8 +595,7 @@ makeSourceStateVar dict name source =
       (makeSetter dict name source)
 
 makeSourceGettableStateVar ::
-   (Storable b, Storable c) =>
-   Dictionary a b c -> GetPName -> Source -> GettableStateVar a
+   (Storable b) => Dictionary a b c -> GetPName -> Source -> GettableStateVar a
 makeSourceGettableStateVar dict name source =
    makeGettableStateVar
       (makeGetter dict name source)
