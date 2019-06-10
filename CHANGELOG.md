@@ -1,3 +1,7 @@
+1.7.0.5
+-------
+* Relaxed upper version bound for `StateVar` package.
+
 1.7.0.4
 -------
 * Removed redundant constraints.
