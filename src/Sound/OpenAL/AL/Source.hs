@@ -92,7 +92,11 @@ import Foreign.Marshal.Array ( allocaArray, peekArray, withArrayLen )
 import Foreign.Marshal.Utils ( with )
 import Foreign.Ptr ( Ptr, castPtr )
 import Foreign.Storable ( Storable(..) )
-import Graphics.Rendering.OpenGL.GL.Tensor ( Vector3(..), Vertex3(..) )
+#ifdef USEOPENGL
+import Graphics.Rendering.OpenGL.GL.Tensor ( Vector3(..), Vertex3 (..) )
+#else
+import Data.Tensor ( Vector3(..), Vertex3 (..) )
+#endif
 
 import Sound.OpenAL.AL.ALboolean
 import Sound.OpenAL.AL.BasicTypes

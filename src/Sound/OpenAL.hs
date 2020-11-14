@@ -1,3 +1,4 @@
+{-# LANGUAGE CPP #-}
 --------------------------------------------------------------------------------
 -- |
 -- Module      :  Sound.OpenAL
@@ -39,7 +40,7 @@ module Sound.OpenAL (
    -- * Convenience Re-exports
    , module Data.ObjectName
    , module Data.StateVar
-   , module Graphics.Rendering.OpenGL.GL.Tensor
+   , module Tensor
 ) where
 
 import Sound.OpenAL.AL
@@ -47,7 +48,11 @@ import Sound.OpenAL.ALC
 
 import Data.ObjectName
 import Data.StateVar
-import Graphics.Rendering.OpenGL.GL.Tensor ( Vector3(..), Vertex3(..) )
+#ifdef USEOPENGL
+import Graphics.Rendering.OpenGL.GL.Tensor as Tensor ( Vector3(..), Vertex3 (..) )
+#else
+import Data.Tensor as Tensor ( Vector3(..), Vertex3 (..) )
+#endif
 
 --------------------------------------------------------------------------------
 -- $ABriefHistoryOfOpenAL
