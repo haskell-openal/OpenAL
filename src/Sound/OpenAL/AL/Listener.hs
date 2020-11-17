@@ -42,7 +42,11 @@ import Foreign.Marshal.Array ( allocaArray, withArray )
 import Foreign.Marshal.Utils ( with )
 import Foreign.Ptr ( Ptr )
 import Foreign.Storable ( Storable )
+#ifdef USEOPENGL
 import Graphics.Rendering.OpenGL.GL.Tensor ( Vector3(..), Vertex3 (..) )
+#else
+import Data.Tensor ( Vector3(..), Vertex3 (..) )
+#endif
 
 import Sound.OpenAL.AL.BasicTypes
 import Sound.OpenAL.AL.PeekPoke
